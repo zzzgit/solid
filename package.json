@@ -1,0 +1,24 @@
+{
+  "name": "solid-app",
+  "version": "1.0.0",
+  "description": "A SolidJS application",
+  "type": "module",
+  "scripts": {
+    "dev": "rsbuild dev",
+    "build": "rsbuild build",
+    "preview": "rsbuild preview",
+    "serve": "rsbuild preview"
+  },
+  "devDependencies": {
+    "@rsbuild/core": "^1.0.0",
+    "@rsbuild/plugin-babel": "^1.0.0",
+    "@rsbuild/plugin-solid": "^1.0.6"
+  },
+  "dependencies": {
+    "@solidjs/router": "^0.15.3",
+    "solid-js": "^1.8.0"
+  },
+  "author": "zzzgit",
+  "license": "ISC",
+  "browserslist": "defaults"
+}
