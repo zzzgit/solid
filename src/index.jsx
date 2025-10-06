@@ -1,6 +1,7 @@
 import { render } from 'solid-js/web'
 import { Route, Router } from '@solidjs/router'
 import App from './App.jsx'
+import 'modern-normalize/modern-normalize.css'
 import './styles.css'
 import Home from './pages/Home.jsx'
 import About from './pages/About.jsx'
