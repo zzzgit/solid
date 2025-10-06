@@ -1,16 +1,20 @@
 import Header from './components/Header.jsx'
 import Aside from './components/Aside.jsx'
-import './styles.css'
 
 const App = (props)=> {
 	return (
 		<>
-			<Header />
+			<header>
+				<Header />
+			</header>
 
-			<Aside />
-
-			<main >
-				{props.children}
+			<main>
+				<aside>
+					<Aside />
+				</aside>
+				<article>
+					{props.children}
+				</article>
 			</main>
 		</>
 	)

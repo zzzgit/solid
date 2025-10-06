@@ -9,6 +9,30 @@ body {
     background-color: #ffffff;
 }
 
+#root>header {
+    height: 60px;
+}
+
+#root>main {
+    display: flex;
+    gap: 20px;
+    min-height: calc(100vh - 60px);
+}
+
+#root>main>aside {
+    width: 250px;
+    border-right: 1px solid #e5e7eb;
+    position: sticky;
+    top: 0;
+    background-color: #f9fafb;
+}
+
+#root>main>article {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+}
+
 /* 導航激活狀態樣式 */
 .active-nav {
     background-color: #2563eb !important;
