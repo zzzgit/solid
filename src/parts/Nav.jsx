@@ -1,0 +1,67 @@
+import { For } from 'solid-js'
+import { A } from '@solidjs/router'
+import { css } from 'solid-styled-components'
+
+const Nav = ()=> {
+	const menuItems = [
+		{
+			path: '/', label: '首頁', icon: '🏠',
+		},
+		{
+			path: '/about', label: '關於', icon: 'ℹ️',
+		},
+		{
+			path: '/services', label: '服務', icon: '🛠️',
+		},
+		{
+			path: '/contact', label: '聯繫', icon: '📞',
+		},
+	]
+
+	return (
+		<nav>
+			<ul class={ulStyle}>
+				<For each={menuItems}>{item=> <li class={liStyle}>
+					<A
+						href={item.path}
+						class={linkStyle}
+						activeClass='active-nav'
+					>
+						<span class={iconStyle}>
+							{item.icon}
+						</span>
+						{item.label}
+					</A>
+				</li>}</For>
+			</ul>
+		</nav>
+	)
+}
+
+export default Nav
+
+const ulStyle = css`
+  list-style: none;
+  margin: 0;
+  padding: 0;
+`
+
+const liStyle = css`
+  margin-bottom: 8px;
+`
+
+const linkStyle = css`
+  display: flex;
+  align-items: center;
+  padding: 12px 20px;
+  text-decoration: none;
+  color: #64748b;
+  border-radius: 6px;
+  margin: 0 10px;
+  transition: all 0.2s ease;
+`
+
+const iconStyle = css`
+  margin-right: 8px;
+  font-size: 16px;
+`

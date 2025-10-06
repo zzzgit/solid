@@ -1,5 +1,6 @@
-import Header from './components/Header.jsx'
-import Aside from './components/Aside.jsx'
+import Header from './parts/Header.js'
+import Nav from './parts/Nav.jsx'
+import { css } from 'solid-styled-components'
 
 const App = (props)=> {
 	return (
@@ -9,8 +10,8 @@ const App = (props)=> {
 			</header>
 
 			<main>
-				<aside>
-					<Aside />
+				<aside class={asideStyle}>
+					<Nav />
 				</aside>
 				<article>
 					{props.children}
@@ -21,3 +22,11 @@ const App = (props)=> {
 }
 
 export default App
+
+const asideStyle = css`  
+  width: 200px;
+  background-color: #f8fafc;
+  border-right: 1px solid #e2e8f0;
+  padding: 20px 0;
+  height: 100%;
+`
