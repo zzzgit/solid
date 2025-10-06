@@ -19,14 +19,6 @@ body {
     min-height: calc(100vh - 60px);
 }
 
-#root>main>aside {
-    width: 250px;
-    border-right: 1px solid #e5e7eb;
-    position: sticky;
-    top: 0;
-    background-color: #f9fafb;
-}
-
 #root>main>article {
     flex: 1;
     padding: 20px;
