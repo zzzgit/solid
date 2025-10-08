@@ -16,6 +16,9 @@ const Nav = ()=> {
 		{
 			path: '/contact', label: '聯繫', icon: '📞',
 		},
+		{
+			path: '/client', label: '客戶', icon: '👥',
+		},
 	]
 
 	return (
