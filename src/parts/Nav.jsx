@@ -1,30 +1,13 @@
 import { For } from 'solid-js'
 import { A } from '@solidjs/router'
 import { css } from 'solid-styled-components'
+import menu from '../config/menu.js'
 
 const Nav = ()=> {
-	const menuItems = [
-		{
-			path: '/', label: '首頁', icon: '🏠',
-		},
-		{
-			path: '/about', label: '關於', icon: 'ℹ️',
-		},
-		{
-			path: '/services', label: '服務', icon: '🛠️',
-		},
-		{
-			path: '/contact', label: '聯繫', icon: '📞',
-		},
-		{
-			path: '/client', label: '客戶', icon: '👥',
-		},
-	]
-
 	return (
 		<nav>
 			<ul class={ulStyle}>
-				<For each={menuItems}>{item=> <li class={liStyle}>
+				<For each={menu}>{item=> <li class={liStyle}>
 					<A
 						href={item.path}
 						class={linkStyle}
