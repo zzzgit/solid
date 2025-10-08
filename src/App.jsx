@@ -6,7 +6,7 @@ import Services from './pages/Services.jsx'
 import Contact from './pages/Contact.jsx'
 import Client from './pages/Client.jsx'
 
-const router = ()=> {
+const Routed = ()=> {
 	return <Router>
 		<Route path='/' component={Mainview}>
 			<Route path='/' component={Home} />
@@ -23,7 +23,7 @@ const router = ()=> {
 }
 
 const App = ()=> {
-	return router()
+	return <Routed />
 }
 
 export default App
