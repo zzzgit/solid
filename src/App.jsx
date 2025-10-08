@@ -1,8 +1,13 @@
 import Header from './parts/Header.jsx'
 import Nav from './parts/Nav.jsx'
 import { css } from 'solid-styled-components'
+import { Route, Router } from '@solidjs/router'
+import Home from './pages/Home.jsx'
+import About from './pages/About.jsx'
+import Services from './pages/Services.jsx'
+import Contact from './pages/Contact.jsx'
 
-const App = (props)=> {
+const Layout = (props)=> {
 	return (
 		<>
 			<header>
@@ -18,6 +23,20 @@ const App = (props)=> {
 				</article>
 			</main>
 		</>
+	)
+}
+
+const App = ()=> {
+	return (
+		<Router>
+			<Route path='/' component={Layout}>
+				<Route path='/' component={Home} />
+				<Route path='about' component={About} />
+				<Route path='services' component={Services} />
+				<Route path='contact' component={Contact} />
+				<Route path='client' component={()=> <div style={{ padding: '20px' }}><h2>Client Page</h2><p>This is the client page content.</p></div>} />
+			</Route>
+		</Router>
 	)
 }
 
