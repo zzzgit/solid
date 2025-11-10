@@ -1,7 +1,9 @@
+import { Button } from '@suid/material'
+// page 永遠不用設置padding margin
 const Client = ()=> {
-	return <div style={{ padding: '20px' }}>
-		<h2>Client Page</h2>
-		<p>This is the client page content.</p>
+	return <div>
+
+		<Button variant='contained'>Client Page</Button>
 	</div>
 }
 

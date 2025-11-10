@@ -7,7 +7,8 @@
     "dev": "rsbuild dev",
     "build": "rsbuild build",
     "preview": "rsbuild preview",
-    "serve": "rsbuild preview"
+    "serve": "rsbuild preview",
+    "doit": "panda codegen"
   },
   "devDependencies": {
     "@rsbuild/core": "^1.0.0",
@@ -16,13 +17,15 @@
     "eslint": "^9.37.0",
     "eslint-config-janus": "^9.0.20",
     "eslint-plugin-mocha": "^11.2.0",
-    "eslint-plugin-solid": "^0.14.5",
-    "solid-styled-components": "^0.28.5"
+    "eslint-plugin-solid": "^0.14.5"
   },
   "dependencies": {
     "@solidjs/router": "^0.15.3",
+    "@suid/icons-material": "^0.9.0",
+    "@suid/material": "^0.19.0",
     "modern-normalize": "^3.0.1",
-    "solid-js": "^1.8.0"
+    "solid-js": "^1.8.0",
+    "solid-styled-components": "^0.28.5"
   },
   "author": "zzzgit",
   "license": "ISC",

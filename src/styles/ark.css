@@ -1,0 +1,4 @@
+[data-scope="steps"][data-part="list"] {
+    display: flex;
+    gap: 10px;
+}

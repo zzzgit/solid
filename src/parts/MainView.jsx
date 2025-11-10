@@ -13,6 +13,7 @@ const MainView = (props)=> {
 				<Nav />
 			</aside>
 			<article>
+				<div>steps</div>
 				{props.children}
 			</article>
 		</main>
@@ -22,9 +23,9 @@ const MainView = (props)=> {
 export default MainView
 
 const asideStyle = css`  
-	width: 200px;
-	background-color: #f8fafc;
-	border-right: 1px solid #e2e8f0;
-	padding: 20px 0;
-	height: 100%;
+width: 200px;
+background-color: #f8fafc;
+border-right: 1px solid #e2e8f0;
+padding: 20px 0;
+height: 100%;
 `
