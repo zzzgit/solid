@@ -33,3 +33,9 @@ npm run preview
 - This project uses `@rsbuild/plugin-solid` with `@rsbuild/plugin-babel` to compile Solid JSX.
 - All source files are plain JavaScript with JSX (`.jsx`).
 - HTML template: `index.html`; App entry: `src/index.jsx`.
+
+## tech stack
+headless: ark 唯一選擇
+with style: 
+    park 不成熟
+    material 不維護
