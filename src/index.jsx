@@ -1,4 +1,4 @@
-import 'modern-normalize/modern-normalize.css'
+import './styles/reset.css'
 import './global.css'
 import './styles/ark.css'
 import { render } from 'solid-js/web'
