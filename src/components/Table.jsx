@@ -1,25 +1,78 @@
-import Column from './Column'
-import Tr from './Tr'
+import { mergeProps, splitProps } from 'solid-js'
 
-const Table = (props)=> {
+const TableTd = (rawProps)=> {
+	const withDefaults = mergeProps({ className: '' }, rawProps)
+	const [commonProps, props] = splitProps(withDefaults, ['children', 'className'])
+	return (
+		<td class={commonProps.className} {...props}>
+			{commonProps.children}
+		</td>
+	)
+}
+
+const TableTh = (rawProps)=> {
+	const withDefaults = mergeProps({ className: '' }, rawProps)
+	const [commonProps, props] = splitProps(withDefaults, ['children', 'className'])
+	return (
+		<th class={commonProps.className} {...props}>
+			{commonProps.children}
+		</th>
+	)
+}
+
+const TableTr = (rawProps)=> {
+	const withDefaults = mergeProps({ className: '' }, rawProps)
+	const [commonProps, props] = splitProps(withDefaults, ['children', 'className'])
+	return (
+		<tr class={commonProps.className} {...props}>
+			{commonProps.children}
+		</tr>
+	)
+}
+const TableThead = (rawProps)=> {
+	const withDefaults = mergeProps({ className: '' }, rawProps)
+	const [commonProps, props] = splitProps(withDefaults, ['children', 'className'])
+	return (
+		<thead class={commonProps.className} {...props}>
+			{commonProps.children}
+		</thead>
+	)
+}
+const TableTbody = (rawProps)=> {
+	const withDefaults = mergeProps({ className: '' }, rawProps)
+	const [commonProps, props] = splitProps(withDefaults, ['children', 'className'])
+	return (
+		<tbody class={commonProps.className} {...props}>
+			{commonProps.children}
+		</tbody>
+	)
+}
+
+const TableTfoot = (rawProps)=> {
+	const withDefaults = mergeProps({ className: '' }, rawProps)
+	const [commonProps, props] = splitProps(withDefaults, ['children', 'className'])
+	return (
+		<tfoot class={commonProps.className} {...props}>
+			{commonProps.children}
+		</tfoot>
+	)
+}
+
+const Table = (rawProps)=> {
+	const withDefaults = mergeProps({ data: [] }, rawProps)
+	const [commonProps, props] = splitProps(withDefaults, ['children', 'className'])
 	return (
 		<table>
-			<thead>
-				<Tr>
-					<Column class='id-column'>ID</Column>
-					<Column class='name-column'>Name</Column>
-					<Column class='status-column'>Status</Column>
-				</Tr>
-			</thead>
-			<tbody>
-				{props.data && props.data.map(row=> <Tr>
-					<td>{row.id}</td>
-					<td>{row.name}</td>
-					<td>{row.status}</td>
-				</Tr>)}
-			</tbody>
+			{commonProps.children}
 		</table>
 	)
 }
 
 export default Table
+
+Table.Thead = TableThead
+Table.Tbody = TableTbody
+Table.Tfoot = TableTfoot
+Table.Tr = TableTr
+Table.Th = TableTh
+Table.Td = TableTd
