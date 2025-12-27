@@ -37,22 +37,22 @@ const Client = ()=> {
 			</tbody>
 		</table>
 		<div>another table</div>
-		<Table>
-			<Table.Thead>
-				<Table.Tr>
-					<Table.Th>ID</Table.Th>
-					<Table.Th>Name</Table.Th>
-					<Table.Th>Status</Table.Th>
-				</Table.Tr>
-			</Table.Thead>
-			<Table.Tbody>
-				<For each={tableData}>{client=> <Table.Tr >
-					<Table.Td>{client.id}</Table.Td>
-					<Table.Td>{client.name}</Table.Td>
-					<Table.Td>{client.status}</Table.Td>
-				</Table.Tr>
+		<Table striped>
+			<Table.Head>
+				<Table.Row>
+					<Table.Cell>ID</Table.Cell>
+					<Table.Cell>Name</Table.Cell>
+					<Table.Cell>Status</Table.Cell>
+				</Table.Row>
+			</Table.Head>
+			<Table.Body>
+				<For each={tableData}>{client=> <Table.Row >
+					<Table.Cell>{client.id}</Table.Cell>
+					<Table.Cell>{client.name}</Table.Cell>
+					<Table.Cell>{client.status}</Table.Cell>
+				</Table.Row>
 				}</For>
-			</Table.Tbody>
+			</Table.Body>
 		</Table>
 
 	</div>

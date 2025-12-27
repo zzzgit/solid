@@ -1,60 +1,72 @@
-import { mergeProps, splitProps } from 'solid-js'
+import {
+	Match, Switch, createContext, mergeProps, splitProps, useContext,
+} from 'solid-js'
+import { css } from '@emotion/css'
+import clsx from 'clsx'
 
-const TableTd = (rawProps)=> {
-	const withDefaults = mergeProps({ className: '' }, rawProps)
+const TableContext = createContext({ variant: '' })
+
+const Cell = (rawProps)=> {
+	const variant = useContext(TableContext).variant
+	const withDefaults = mergeProps({ }, rawProps)
 	const [commonProps, props] = splitProps(withDefaults, ['children', 'className'])
 	return (
-		<td class={commonProps.className} {...props}>
-			{commonProps.children}
-		</td>
+		<Switch when ={variant === 'head'}>
+			<Match when={true}>
+				<th class={commonProps.className} >
+					{commonProps.children}
+				</th>
+			</Match>
+			<Match when={false}>
+				<td class={commonProps.className} >
+					{commonProps.children}
+				</td>
+			</Match>
+		</Switch>
 	)
 }
 
-const TableTh = (rawProps)=> {
-	const withDefaults = mergeProps({ className: '' }, rawProps)
+const Row = (rawProps)=> {
+	const withDefaults = mergeProps({ }, rawProps)
 	const [commonProps, props] = splitProps(withDefaults, ['children', 'className'])
 	return (
-		<th class={commonProps.className} {...props}>
-			{commonProps.children}
-		</th>
-	)
-}
-
-const TableTr = (rawProps)=> {
-	const withDefaults = mergeProps({ className: '' }, rawProps)
-	const [commonProps, props] = splitProps(withDefaults, ['children', 'className'])
-	return (
-		<tr class={commonProps.className} {...props}>
+		<tr class={commonProps.className} >
 			{commonProps.children}
 		</tr>
 	)
 }
-const TableThead = (rawProps)=> {
-	const withDefaults = mergeProps({ className: '' }, rawProps)
+const Head = (rawProps)=> {
+	const withDefaults = mergeProps({ }, rawProps)
 	const [commonProps, props] = splitProps(withDefaults, ['children', 'className'])
 	return (
-		<thead class={commonProps.className} {...props}>
-			{commonProps.children}
-		</thead>
+		<TableContext.Provider value={{ variant: 'head' }}>
+			<thead class={commonProps.className} >
+				{commonProps.children}
+			</thead>
+		</TableContext.Provider>
 	)
 }
-const TableTbody = (rawProps)=> {
-	const withDefaults = mergeProps({ className: '' }, rawProps)
+const Body = (rawProps)=> {
+	const withDefaults = mergeProps({ }, rawProps)
 	const [commonProps, props] = splitProps(withDefaults, ['children', 'className'])
 	return (
-		<tbody class={commonProps.className} {...props}>
-			{commonProps.children}
-		</tbody>
+		<TableContext.Provider value={{ variant: 'body' }}>
+			<tbody class={commonProps.className} >
+				{commonProps.children}
+			</tbody>
+		</TableContext.Provider>
 	)
 }
 
-const TableTfoot = (rawProps)=> {
-	const withDefaults = mergeProps({ className: '' }, rawProps)
+const Foot = (rawProps)=> {
+	const withDefaults = mergeProps({ }, rawProps)
 	const [commonProps, props] = splitProps(withDefaults, ['children', 'className'])
 	return (
-		<tfoot class={commonProps.className} {...props}>
-			{commonProps.children}
-		</tfoot>
+		<TableContext.Provider value={{ variant: 'foot' }}>
+			<tfoot class={commonProps.className} >
+				{commonProps.children}
+			</tfoot>
+		</TableContext.Provider>
 	)
 }
 
@@ -62,7 +74,7 @@ const Table = (rawProps)=> {
 	const withDefaults = mergeProps({ data: [] }, rawProps)
 	const [commonProps, props] = splitProps(withDefaults, ['children', 'className'])
 	return (
-		<table>
+		<table css={tableStyle} class={clsx(commonProps.className, { striped: props.striped })} >
 			{commonProps.children}
 		</table>
 	)
@@ -70,9 +82,17 @@ const Table = (rawProps)=> {
 
 export default Table
 
-Table.Thead = TableThead
-Table.Tbody = TableTbody
-Table.Tfoot = TableTfoot
-Table.Tr = TableTr
-Table.Th = TableTh
-Table.Td = TableTd
+Table.Root = Table
+Table.Head = Head
+Table.Body = Body
+Table.Foot = Foot
+Table.Row = Row
+Table.Cell = Cell
+
+const tableStyle = css`
+color: gray;
+&.striped {
+	border: 1px solid red;
+	background-color: #f9f9f9;
+}
+`
