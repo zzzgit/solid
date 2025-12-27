@@ -1,8 +1,7 @@
 import {
-	Match, Switch, classList, createContext, mergeProps, splitProps, useContext,
+	Match, Switch, createContext, mergeProps, splitProps, useContext,
 } from 'solid-js'
 import { css } from '@emotion/css'
-import clsx from 'clsx'
 
 const TableContext = createContext({ variant: '' })
 
@@ -74,7 +73,11 @@ const Table = (rawProps)=> {
 	const withDefaults = mergeProps({ data: [] }, rawProps)
 	const [commonProps, props] = splitProps(withDefaults, ['children', 'className'])
 	return (
-		<table class={clsx(tableStyle, commonProps.className, { striped: props.striped })} >
+		<table classList={{
+			tableStyle: true,
+			[commonProps.className]: true,
+			striped: props.striped,
+		}} >
 			{commonProps.children}
 		</table>
 	)
