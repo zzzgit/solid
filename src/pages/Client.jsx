@@ -17,7 +17,7 @@ const Client = ()=> {
 	return <div>
 		<div>another table</div>
 
-		<Table class='fooooo'>
+		<Table class='fooooo' size='lg'>
 			<Table.Head>
 				<Table.Row>
 					<Table.Cell>ID</Table.Cell>

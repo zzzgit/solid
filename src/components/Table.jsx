@@ -69,17 +69,22 @@ const Foot = (rawProps)=> {
 	)
 }
 
-const Table = (rawProps)=> {
-	const withDefaults = mergeProps({ data: [] }, rawProps)
-	const [commonProps, props] = splitProps(withDefaults, ['children', 'class'])
+const Table = (props)=> {
+	const tableSizes = {
+		sm: 'small',
+		md: 'medium',
+		lg: 'large',
+	}
+	const size = tableSizes[props.size || 'md']
 	return (
 		<table
 			class={tableStyle}
 			classList={{
-				[commonProps.class]: true,
+				[props.class]: true,
+				[size]: true,
 				striped: props.striped,
 			}} >
-			{commonProps.children}
+			{props.children}
 		</table>
 	)
 }
@@ -95,18 +100,38 @@ Table.Cell = Cell
 
 const tableStyle = css`
 label: Table;
+border-spacing: 0;
+border-top: 1px solid black;
 tr {
 	//
 }
-td {
-	border-bottom: 1px solid black;
+th, td {
+	border-bottom: 1px solid rgb(228,228,231);
 }
 &.striped {
+	border-top: none;
 	tbody {
 		tr:nth-of-type(odd) {
 			background-color: gray;
 		}
-
+	}
+	th, td {
+		border-bottom: none;
+	}
+}
+&.small {
+	th, td {
+		padding: 8px;
+	}
+}
+&.medium {
+	th, td {
+		padding: 12px;
+	}
+}
+&.large {
+	th, td {
+		padding: 12px 16px;
 	}
 }
 
