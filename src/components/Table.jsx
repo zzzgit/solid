@@ -8,16 +8,16 @@ const TableContext = createContext({ variant: '' })
 const Cell = (rawProps)=> {
 	const variant = useContext(TableContext).variant
 	const withDefaults = mergeProps({ }, rawProps)
-	const [commonProps, props] = splitProps(withDefaults, ['children', 'className'])
+	const [commonProps, props] = splitProps(withDefaults, ['children', 'class'])
 	return (
 		<Switch when ={variant === 'head'}>
 			<Match when={true}>
-				<th class={commonProps.className} >
+				<th class={commonProps.class} >
 					{commonProps.children}
 				</th>
 			</Match>
 			<Match when={false}>
-				<td class={commonProps.className} >
+				<td class={commonProps.class} >
 					{commonProps.children}
 				</td>
 			</Match>
@@ -27,19 +27,19 @@ const Cell = (rawProps)=> {
 
 const Row = (rawProps)=> {
 	const withDefaults = mergeProps({ }, rawProps)
-	const [commonProps, props] = splitProps(withDefaults, ['children', 'className'])
+	const [commonProps, props] = splitProps(withDefaults, ['children', 'class'])
 	return (
-		<tr class={commonProps.className} >
+		<tr class={commonProps.class} >
 			{commonProps.children}
 		</tr>
 	)
 }
 const Head = (rawProps)=> {
 	const withDefaults = mergeProps({ }, rawProps)
-	const [commonProps, props] = splitProps(withDefaults, ['children', 'className'])
+	const [commonProps, props] = splitProps(withDefaults, ['children', 'class'])
 	return (
 		<TableContext.Provider value={{ variant: 'head' }}>
-			<thead class={commonProps.className} >
+			<thead class={commonProps.class} >
 				{commonProps.children}
 			</thead>
 		</TableContext.Provider>
@@ -47,10 +47,10 @@ const Head = (rawProps)=> {
 }
 const Body = (rawProps)=> {
 	const withDefaults = mergeProps({ }, rawProps)
-	const [commonProps, props] = splitProps(withDefaults, ['children', 'className'])
+	const [commonProps, props] = splitProps(withDefaults, ['children', 'class'])
 	return (
 		<TableContext.Provider value={{ variant: 'body' }}>
-			<tbody class={commonProps.className} >
+			<tbody class={commonProps.class} >
 				{commonProps.children}
 			</tbody>
 		</TableContext.Provider>
@@ -59,10 +59,10 @@ const Body = (rawProps)=> {
 
 const Foot = (rawProps)=> {
 	const withDefaults = mergeProps({ }, rawProps)
-	const [commonProps, props] = splitProps(withDefaults, ['children', 'className'])
+	const [commonProps, props] = splitProps(withDefaults, ['children', 'class'])
 	return (
 		<TableContext.Provider value={{ variant: 'foot' }}>
-			<tfoot class={commonProps.className} >
+			<tfoot class={commonProps.class} >
 				{commonProps.children}
 			</tfoot>
 		</TableContext.Provider>
@@ -71,13 +71,14 @@ const Foot = (rawProps)=> {
 
 const Table = (rawProps)=> {
 	const withDefaults = mergeProps({ data: [] }, rawProps)
-	const [commonProps, props] = splitProps(withDefaults, ['children', 'className'])
+	const [commonProps, props] = splitProps(withDefaults, ['children', 'class'])
 	return (
-		<table classList={{
-			tableStyle: true,
-			[commonProps.className]: true,
-			striped: props.striped,
-		}} >
+		<table
+			class={tableStyle}
+			classList={{
+				[commonProps.class]: true,
+				striped: props.striped,
+			}} >
 			{commonProps.children}
 		</table>
 	)
@@ -93,6 +94,7 @@ Table.Row = Row
 Table.Cell = Cell
 
 const tableStyle = css`
+label: Table;
 tr {
 	//
 }

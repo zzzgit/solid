@@ -37,7 +37,7 @@ const Client = ()=> {
 			</tbody>
 		</table>
 		<div>another table</div>
-		<Table striped>
+		<Table striped class='fooooo'>
 			<Table.Head>
 				<Table.Row>
 					<Table.Cell>ID</Table.Cell>
