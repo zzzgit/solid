@@ -1,5 +1,4 @@
 import { For } from 'solid-js'
-import { Button } from '@suid/material'
 import Table from '../components/Table.jsx'
 // page 永遠不用設置padding margin
 
@@ -16,28 +15,9 @@ const tableData = [
 ]
 const Client = ()=> {
 	return <div>
-
-		<Button variant='contained'>Client Page</Button>
-		<br />
-		<table border={1} style={{ 'margin-top': '20px' }}>
-			<thead>
-				<tr>
-					<th>ID</th>
-					<th>Name</th>
-					<th>Status</th>
-				</tr>
-			</thead>
-			<tbody>
-				<For each={tableData}>{client=> <tr >
-					<td>{client.id}</td>
-					<td>{client.name}</td>
-					<td>{client.status}</td>
-				</tr>
-				}</For>
-			</tbody>
-		</table>
 		<div>another table</div>
-		<Table striped class='fooooo'>
+
+		<Table class='fooooo'>
 			<Table.Head>
 				<Table.Row>
 					<Table.Cell>ID</Table.Cell>

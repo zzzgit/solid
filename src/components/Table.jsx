@@ -10,13 +10,13 @@ const Cell = (rawProps)=> {
 	const withDefaults = mergeProps({ }, rawProps)
 	const [commonProps, props] = splitProps(withDefaults, ['children', 'class'])
 	return (
-		<Switch when ={variant === 'head'}>
-			<Match when={true}>
+		<Switch>
+			<Match when={variant === 'head'}>
 				<th class={commonProps.class} >
 					{commonProps.children}
 				</th>
 			</Match>
-			<Match when={false}>
+			<Match when={variant === 'body'}>
 				<td class={commonProps.class} >
 					{commonProps.children}
 				</td>
@@ -98,11 +98,15 @@ label: Table;
 tr {
 	//
 }
+td {
+	border-bottom: 1px solid black;
+}
 &.striped {
 	tbody {
 		tr:nth-of-type(odd) {
 			background-color: gray;
 		}
+
 	}
 }
 
