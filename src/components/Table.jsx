@@ -5,20 +5,19 @@ import { css } from '@emotion/css'
 
 const TableContext = createContext({ variant: '' })
 
-const Cell = (rawProps)=> {
+const Cell = (props)=> {
 	const variant = useContext(TableContext).variant
-	const withDefaults = mergeProps({ }, rawProps)
-	const [commonProps, props] = splitProps(withDefaults, ['children', 'class'])
+	const style = props.width ? { width: props.width } : {}
 	return (
 		<Switch>
 			<Match when={variant === 'head'}>
-				<th class={commonProps.class} >
-					{commonProps.children}
+				<th class={props.class} style={style}>
+					{props.children}
 				</th>
 			</Match>
 			<Match when={variant === 'body'}>
-				<td class={commonProps.class} >
-					{commonProps.children}
+				<td class={props.class} >
+					{props.children}
 				</td>
 			</Match>
 		</Switch>
