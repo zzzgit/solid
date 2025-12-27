@@ -1,5 +1,5 @@
 import {
-	Match, Switch, createContext, mergeProps, splitProps, useContext,
+	Match, Switch, classList, createContext, mergeProps, splitProps, useContext,
 } from 'solid-js'
 import { css } from '@emotion/css'
 import clsx from 'clsx'
@@ -74,7 +74,7 @@ const Table = (rawProps)=> {
 	const withDefaults = mergeProps({ data: [] }, rawProps)
 	const [commonProps, props] = splitProps(withDefaults, ['children', 'className'])
 	return (
-		<table css={tableStyle} class={clsx(commonProps.className, { striped: props.striped })} >
+		<table class={clsx(tableStyle, commonProps.className, { striped: props.striped })} >
 			{commonProps.children}
 		</table>
 	)
@@ -90,9 +90,15 @@ Table.Row = Row
 Table.Cell = Cell
 
 const tableStyle = css`
-color: gray;
-&.striped {
-	border: 1px solid red;
-	background-color: #f9f9f9;
+tr {
+	//
 }
+&.striped {
+	tbody {
+		tr:nth-of-type(odd) {
+			background-color: gray;
+		}
+	}
+}
+
 `
