@@ -1,4 +1,4 @@
-import { styled } from 'solid-styled-components'
+import { styled } from '@emotion/styled'
 import { Steps as RawSteps } from '@ark-ui/solid/steps'
 
 const Steps = styled(RawSteps)`

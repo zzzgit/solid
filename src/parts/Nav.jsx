@@ -1,6 +1,6 @@
 import { For } from 'solid-js'
 import { A } from '@solidjs/router'
-import { css } from 'solid-styled-components'
+import { css } from '@emotion/css'
 import menu from '../config/menu.js'
 
 const Nav = ()=> {
