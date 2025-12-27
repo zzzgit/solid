@@ -7,11 +7,11 @@ const TableContext = createContext({ variant: '' })
 
 const Cell = (props)=> {
 	const variant = useContext(TableContext).variant
-	const style = props.width ? { width: props.width } : {}
+	const style = ()=> { return props.width ? { width: props.width } : {} }
 	return (
 		<Switch>
 			<Match when={variant === 'head'}>
-				<th class={props.class} style={style}>
+				<th class={props.class} style={style()}>
 					{props.children}
 				</th>
 			</Match>
