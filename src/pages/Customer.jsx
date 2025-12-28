@@ -1,6 +1,6 @@
 import { For, createSignal, onMount } from 'solid-js'
 import Table from '../components/Table.jsx'
-import { getCustomers, searchCustomers } from '../api.js'
+import { searchCustomers } from '../api.js'
 import CustomerCreationDialog from './widgets/Customer.creation.jsx'
 // page 永遠不用設置padding margin
 
@@ -12,10 +12,9 @@ const Customer = ()=> {
 	const [searchGender, setSearchGender] = createSignal('')
 
 	onMount(()=> {
-		getCustomers().then((data)=> {
-			console.log(data)
-			if (data){
-				setTableData(data)
+		searchCustomers().then((response)=> {
+			if (response.data){
+				setTableData(response.data)
 			}
 			return null
 		}).catch((err)=> {
