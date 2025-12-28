@@ -1,7 +1,13 @@
 const baseUrl = 'http://localhost:3000/api/v1/'
 
-const doGet = (endpoint)=> {
-	return fetch(new URL(endpoint, baseUrl).href).then((response)=> {
+const doGet = (endpoint, params = {})=> {
+	const url = new URL(endpoint, baseUrl)
+	Object.keys(params).forEach((key)=> {
+		if (params[key] != null){
+			url.searchParams.append(key, params[key])
+		}
+	})
+	return fetch(url.href).then((response)=> {
 		return response.json()
 	})
 }
