@@ -16,7 +16,6 @@ const CustomerCreationDialog = (props)=> {
 
 	const handleCommit = async()=> {
 		console.log('Form Data:', formData())
-
 		createCustomer(formData()).then((result)=> {
 			console.log('Customer created:', result)
 			alert('Customer created successfully!')
