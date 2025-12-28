@@ -1,12 +1,15 @@
 import { For, createSignal, onMount } from 'solid-js'
 import Table from '../components/Table.jsx'
-import { getCustomers } from '../api.js'
+import { getCustomers, searchCustomers } from '../api.js'
 import CustomerCreationDialog from './widgets/Customer.creation.jsx'
 // page 永遠不用設置padding margin
 
 const Customer = ()=> {
 	const [tableData, setTableData] = createSignal([])
 	const [isDialogOpen, setIsDialogOpen] = createSignal(false)
+	const [searchId, setSearchId] = createSignal('')
+	const [searchName, setSearchName] = createSignal('')
+	const [searchGender, setSearchGender] = createSignal('')
 
 	onMount(()=> {
 		getCustomers().then((data)=> {
@@ -20,6 +23,22 @@ const Customer = ()=> {
 		})
 	})
 
+	const handleSearch = ()=> {
+		const params = {}
+		if (searchId()){ params.id = searchId() }
+		if (searchName()){ params.name = searchName() }
+		if (searchGender()){ params.gender = searchGender() }
+
+		searchCustomers(params).then((response)=> {
+			if (response.data){
+				setTableData(response.data)
+			}
+			return null
+		}).catch((err)=> {
+			console.error('Error searching customers:', err)
+		})
+	}
+
 	const handleOpenDialog = ()=> {
 		setIsDialogOpen(true)
 	}
@@ -32,7 +51,6 @@ const Customer = ()=> {
 		<div style={{
 			display: 'flex', 'justify-content': 'space-between', 'align-items': 'center', 'margin-bottom': '20px',
 		}}>
-			<div>another table</div>
 			<button
 				onClick={handleOpenDialog}
 				style={{
@@ -40,6 +58,47 @@ const Customer = ()=> {
 				}}
 			>
 				Create
+			</button>
+		</div>
+
+		{/* Search Bar */}
+		<div style={{
+			display: 'flex', gap: '10px', 'margin-bottom': '20px', 'align-items': 'center',
+		}}>
+			<input
+				type='text'
+				placeholder='Search by ID'
+				value={searchId()}
+				onInput={e=> setSearchId(e.target.value)}
+				style={{
+					padding: '8px 12px', border: '1px solid #ddd', 'border-radius': '4px', flex: '1',
+				}}
+			/>
+			<input
+				type='text'
+				placeholder='Search by Name'
+				value={searchName()}
+				onInput={e=> setSearchName(e.target.value)}
+				style={{
+					padding: '8px 12px', border: '1px solid #ddd', 'border-radius': '4px', flex: '1',
+				}}
+			/>
+			<input
+				type='text'
+				placeholder='Search by Gender'
+				value={searchGender()}
+				onInput={e=> setSearchGender(e.target.value)}
+				style={{
+					padding: '8px 12px', border: '1px solid #ddd', 'border-radius': '4px', flex: '1',
+				}}
+			/>
+			<button
+				onClick={handleSearch}
+				style={{
+					padding: '8px 20px', 'background-color': '#10b981', color: 'white', border: 'none', 'border-radius': '4px', cursor: 'pointer', 'white-space': 'nowrap',
+				}}
+			>
+				Search
 			</button>
 		</div>
 
