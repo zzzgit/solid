@@ -101,8 +101,11 @@ const tableStyle = css`
 label: Table;
 border-spacing: 0;
 border-top: 1px solid rgb(228,228,231);
-tr {
-	//
+tbody tr {
+	transition: background-color 0.2s ease;
+	&:hover {
+		background-color: rgb(250,250,250);
+	}
 }
 th {
 	border-bottom: 1px solid rgb(228,228,231);
