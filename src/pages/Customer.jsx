@@ -11,6 +11,11 @@ const Customer = ()=> {
 	const [searchId, setSearchId] = createSignal('')
 	const [searchName, setSearchName] = createSignal('')
 	const [searchGender, setSearchGender] = createSignal('')
+	const [pager, setPager] = createSignal({
+		total: 0,
+		pageSize: 20,
+		currentPage: 1,
+	})
 
 	onMount(()=> {
 		searchCustomers().then((response)=> {
@@ -29,9 +34,10 @@ const Customer = ()=> {
 		if (searchName()){ params.name = searchName() }
 		if (searchGender()){ params.gender = searchGender() }
 
-		searchCustomers(params).then((response)=> {
+		searchCustomers(params, pager()).then((response)=> {
 			if (response.data){
 				setTableData(response.data)
+				setPager(response.pager)
 			}
 			return null
 		}).catch((err)=> {
@@ -45,6 +51,31 @@ const Customer = ()=> {
 
 	const handleCloseDialog = ()=> {
 		setIsDialogOpen(false)
+	}
+
+	const handlePageChange = (newPage)=> {
+		console.log('Page changed to:', newPage)
+		if(window){
+			return null
+		}
+		const params = {}
+		if (searchId()){ params.id = searchId() }
+		if (searchName()){ params.name = searchName() }
+		if (searchGender()){ params.gender = searchGender() }
+
+		const newPager = {
+			...pager(),
+			currentPage: newPage,
+		}
+		searchCustomers(params, newPager).then((response)=> {
+			if (response.data){
+				setTableData(response.data)
+				setPager(response.pager)
+			}
+			return null
+		}).catch((err)=> {
+			console.error('Error changing page:', err)
+		})
 	}
 
 	return <div>
@@ -129,7 +160,7 @@ const Customer = ()=> {
 				</For>
 			</Table.Body>
 		</Table>
-		<Pagination />
+		<Pagination pager={pager()} onPageChange={handlePageChange} />
 
 		<CustomerCreationDialog
 			isOpen={isDialogOpen()}

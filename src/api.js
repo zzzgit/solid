@@ -13,6 +13,11 @@ export const createCustomer = (customerObject)=> {
 	return doPost('customers', customerObject)
 }
 
-export const searchCustomers = (params)=> {
+export const searchCustomers = (params, pager)=> {
+	if (pager){
+		params = {
+			...params, page: pager.currentPage, pageSize: pager.pageSize,
+		}
+	}
 	return doGet('customers', params)
 }
