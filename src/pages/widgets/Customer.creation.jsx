@@ -81,8 +81,8 @@ const CustomerCreationDialog = (props)=> {
 						}}
 					>
 						<option value=''>Select gender</option>
-						<option value='MALE'>Male</option>
-						<option value='FEMALE'>Female</option>
+						<option value='M'>Male</option>
+						<option value='F'>Female</option>
 						<option value='OTHER'>Other</option>
 					</select>
 				</div>

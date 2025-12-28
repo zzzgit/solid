@@ -100,11 +100,15 @@ Table.Cell = Cell
 const tableStyle = css`
 label: Table;
 border-spacing: 0;
-border-top: 1px solid black;
+border-top: 1px solid rgb(228,228,231);
 tr {
 	//
 }
-th, td {
+th {
+	border-bottom: 1px solid rgb(228,228,231);
+	user-select: none;
+}
+td {
 	border-bottom: 1px solid rgb(228,228,231);
 }
 &.striped {
@@ -114,22 +118,34 @@ th, td {
 			background-color: gray;
 		}
 	}
-	th, td {
+	th {
+		border-bottom: none;
+	}
+	td {
 		border-bottom: none;
 	}
 }
 &.small {
-	th, td {
+	th {
+		padding: 8px;
+	}
+	td {
 		padding: 8px;
 	}
 }
 &.medium {
-	th, td {
+	th {
+		padding: 12px;
+	}
+	td {
 		padding: 12px;
 	}
 }
 &.large {
-	th, td {
+	th {
+		padding: 12px 16px;
+	}
+	td {
 		padding: 12px 16px;
 	}
 }
