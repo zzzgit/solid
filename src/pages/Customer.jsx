@@ -50,9 +50,9 @@ const Customer = ()=> {
 					<Table.Cell>Name</Table.Cell>
 					<Table.Cell>Gender</Table.Cell>
 					<Table.Cell>Phone</Table.Cell>
-					<Table.Cell>Extra</Table.Cell>
 					<Table.Cell>Created At</Table.Cell>
 					<Table.Cell>Updated At</Table.Cell>
+					<Table.Cell>Extra</Table.Cell>
 				</Table.Row>
 			</Table.Head>
 			<Table.Body>
@@ -62,9 +62,9 @@ const Customer = ()=> {
 						<Table.Cell>{client.name}</Table.Cell>
 						<Table.Cell>{client.gender || '-'}</Table.Cell>
 						<Table.Cell>{client.phone || '-'}</Table.Cell>
-						<Table.Cell>{client.extra || '-'}</Table.Cell>
 						<Table.Cell>{new Date(client.createdAt).toLocaleString()}</Table.Cell>
 						<Table.Cell>{new Date(client.updatedAt).toLocaleString()}</Table.Cell>
+						<Table.Cell>{client.extra || '-'}</Table.Cell>
 					</Table.Row>
 					}
 				</For>
