@@ -2,6 +2,7 @@ import { For, createSignal, onMount } from 'solid-js'
 import Table from '../components/Table.jsx'
 import { searchCustomers } from '../api.js'
 import CustomerCreationDialog from './widgets/Customer.creation.jsx'
+import Pagination from '../components/Pagination.jsx'
 // page 永遠不用設置padding margin
 
 const Customer = ()=> {
@@ -128,6 +129,7 @@ const Customer = ()=> {
 				</For>
 			</Table.Body>
 		</Table>
+		<Pagination />
 
 		<CustomerCreationDialog
 			isOpen={isDialogOpen()}
