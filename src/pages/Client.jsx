@@ -4,12 +4,14 @@ import { getCustomers } from '../api.js'
 // page 永遠不用設置padding margin
 
 const Client = ()=> {
-	const tableData = createSignal([])
+	const [tableData, setTableData] = createSignal([{
+		id: 1, name: 'Loading...', status: 'Loading...',
+	}])
 	onMount(()=> {
 		getCustomers().then((data)=> {
 			console.log(data)
 			if (data){
-				tableData(data)
+				setTableData(data)
 			}
 			return null
 		}).catch((err)=> {
@@ -29,12 +31,14 @@ const Client = ()=> {
 				</Table.Row>
 			</Table.Head>
 			<Table.Body>
-				<For each={tableData}>{client=> <Table.Row >
-					<Table.Cell>{client.id}</Table.Cell>
-					<Table.Cell>{client.name}</Table.Cell>
-					<Table.Cell>{client.status}</Table.Cell>
-				</Table.Row>
-				}</For>
+				<For each={tableData()}>
+					{client=> <Table.Row >
+						<Table.Cell>{client.id}</Table.Cell>
+						<Table.Cell>{client.name}</Table.Cell>
+						<Table.Cell>{client.status}</Table.Cell>
+					</Table.Row>
+					}
+				</For>
 			</Table.Body>
 		</Table>
 
