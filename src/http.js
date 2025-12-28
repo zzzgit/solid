@@ -5,4 +5,15 @@ const doGet = async(endpoint)=> {
 	return response.json()
 }
 
-export { doGet }
+const doPost = async(endpoint, data)=> {
+	const response = await fetch(new URL(endpoint, baseUrl).href, {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json',
+		},
+		body: JSON.stringify(data),
+	})
+	return response.json()
+}
+
+export { doGet, doPost }

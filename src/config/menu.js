@@ -12,7 +12,7 @@ const menu = [
 		path: '/contact', label: '聯繫', icon: '📞',
 	},
 	{
-		path: '/client', label: '客戶', icon: '👥',
+		path: '/customer', label: '客戶', icon: '👥',
 	},
 ]
 

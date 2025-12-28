@@ -4,7 +4,7 @@ import Home from './pages/Home.jsx'
 import About from './pages/About.jsx'
 import Services from './pages/Services.jsx'
 import Contact from './pages/Contact.jsx'
-import Client from './pages/Client.jsx'
+import Customer from './pages/Customer.jsx'
 
 const Routed = ()=> {
 	return <Router>
@@ -13,7 +13,7 @@ const Routed = ()=> {
 			<Route path='about' component={About} />
 			<Route path='services' component={Services} />
 			<Route path='contact' component={Contact} />
-			<Route path='client' component={Client} />
+			<Route path='customer' component={Customer} />
 		</Route>
 		<Route path='/*' component={()=> <div style={{ padding: '20px' }}>
 			<h2>404 Not Found</h2>
