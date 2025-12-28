@@ -1,19 +1,22 @@
-import { For } from 'solid-js'
+import { For, createSignal, onMount } from 'solid-js'
 import Table from '../components/Table.jsx'
+import { getCustomers } from '../api.js'
 // page 永遠不用設置padding margin
 
-const tableData = [
-	{
-		id: 1, name: 'Client A', status: 'Active',
-	},
-	{
-		id: 2, name: 'Client B', status: 'Inactive',
-	},
-	{
-		id: 3, name: 'Client C', status: 'Active',
-	},
-]
 const Client = ()=> {
+	const tableData = createSignal([])
+	onMount(()=> {
+		getCustomers().then((data)=> {
+			console.log(data)
+			if (data){
+				tableData(data)
+			}
+			return null
+		}).catch((err)=> {
+			console.error('Error fetching customers:', err)
+		})
+	})
+
 	return <div>
 		<div>another table</div>
 
