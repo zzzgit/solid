@@ -3,15 +3,22 @@ import Table from '../components/Table.jsx'
 import { getCustomers } from '../api.js'
 // page 永遠不用設置padding margin
 
-const Client = ()=> {
+const Customer = ()=> {
 	const [tableData, setTableData] = createSignal([{
-		id: 1, name: 'Loading...', status: 'Loading...',
+		id: 1,
+		name: 'Loading...',
+		gender: null,
+		phone: null,
+		extra: null,
+		createdAt: new Date(),
+		updatedAt: new Date(),
 	}])
 	const [isDialogOpen, setIsDialogOpen] = createSignal(false)
 	const [formData, setFormData] = createSignal({
-		id: '',
 		name: '',
-		status: '',
+		gender: '',
+		phone: '',
+		extra: '',
 	})
 
 	onMount(()=> {
@@ -33,7 +40,10 @@ const Client = ()=> {
 	const handleCloseDialog = ()=> {
 		setIsDialogOpen(false)
 		setFormData({
-			id: '', name: '', status: '',
+			name: '',
+			gender: '',
+			phone: '',
+			extra: '',
 		})
 	}
 
@@ -67,7 +77,11 @@ const Client = ()=> {
 				<Table.Row>
 					<Table.Cell>ID</Table.Cell>
 					<Table.Cell>Name</Table.Cell>
-					<Table.Cell>Status</Table.Cell>
+					<Table.Cell>Gender</Table.Cell>
+					<Table.Cell>Phone</Table.Cell>
+					<Table.Cell>Extra</Table.Cell>
+					<Table.Cell>Created At</Table.Cell>
+					<Table.Cell>Updated At</Table.Cell>
 				</Table.Row>
 			</Table.Head>
 			<Table.Body>
@@ -75,7 +89,11 @@ const Client = ()=> {
 					{client=> <Table.Row >
 						<Table.Cell>{client.id}</Table.Cell>
 						<Table.Cell>{client.name}</Table.Cell>
-						<Table.Cell>{client.status}</Table.Cell>
+						<Table.Cell>{client.gender || '-'}</Table.Cell>
+						<Table.Cell>{client.phone || '-'}</Table.Cell>
+						<Table.Cell>{client.extra || '-'}</Table.Cell>
+						<Table.Cell>{new Date(client.createdAt).toLocaleString()}</Table.Cell>
+						<Table.Cell>{new Date(client.updatedAt).toLocaleString()}</Table.Cell>
 					</Table.Row>
 					}
 				</For>
@@ -100,21 +118,7 @@ const Client = ()=> {
 				<div style={{ 'margin-bottom': '16px' }}>
 					<label style={{
 						display: 'block', 'margin-bottom': '4px', 'font-weight': '500',
-					}}>ID</label>
-					<input
-						type='text'
-						value={formData().id}
-						onInput={e=> handleInputChange('id', e.target.value)}
-						style={{
-							width: '100%', padding: '8px', border: '1px solid #ddd', 'border-radius': '4px', 'box-sizing': 'border-box',
-						}}
-					/>
-				</div>
-
-				<div style={{ 'margin-bottom': '16px' }}>
-					<label style={{
-						display: 'block', 'margin-bottom': '4px', 'font-weight': '500',
-					}}>Name</label>
+					}}>Name *</label>
 					<input
 						type='text'
 						value={formData().name}
@@ -122,20 +126,54 @@ const Client = ()=> {
 						style={{
 							width: '100%', padding: '8px', border: '1px solid #ddd', 'border-radius': '4px', 'box-sizing': 'border-box',
 						}}
+						placeholder='Enter name'
+					/>
+				</div>
+
+				<div style={{ 'margin-bottom': '16px' }}>
+					<label style={{
+						display: 'block', 'margin-bottom': '4px', 'font-weight': '500',
+					}}>Gender</label>
+					<select
+						value={formData().gender}
+						onChange={e=> handleInputChange('gender', e.target.value)}
+						style={{
+							width: '100%', padding: '8px', border: '1px solid #ddd', 'border-radius': '4px', 'box-sizing': 'border-box',
+						}}
+					>
+						<option value=''>Select gender</option>
+						<option value='MALE'>Male</option>
+						<option value='FEMALE'>Female</option>
+						<option value='OTHER'>Other</option>
+					</select>
+				</div>
+
+				<div style={{ 'margin-bottom': '16px' }}>
+					<label style={{
+						display: 'block', 'margin-bottom': '4px', 'font-weight': '500',
+					}}>Phone</label>
+					<input
+						type='tel'
+						value={formData().phone}
+						onInput={e=> handleInputChange('phone', e.target.value)}
+						style={{
+							width: '100%', padding: '8px', border: '1px solid #ddd', 'border-radius': '4px', 'box-sizing': 'border-box',
+						}}
+						placeholder='Enter phone number'
 					/>
 				</div>
 
 				<div style={{ 'margin-bottom': '24px' }}>
 					<label style={{
 						display: 'block', 'margin-bottom': '4px', 'font-weight': '500',
-					}}>Status</label>
-					<input
-						type='text'
-						value={formData().status}
-						onInput={e=> handleInputChange('status', e.target.value)}
+					}}>Extra</label>
+					<textarea
+						value={formData().extra}
+						onInput={e=> handleInputChange('extra', e.target.value)}
 						style={{
-							width: '100%', padding: '8px', border: '1px solid #ddd', 'border-radius': '4px', 'box-sizing': 'border-box',
+							width: '100%', padding: '8px', border: '1px solid #ddd', 'border-radius': '4px', 'box-sizing': 'border-box', 'min-height': '80px',
 						}}
+						placeholder='Additional notes'
 					/>
 				</div>
 
@@ -166,4 +204,4 @@ const Client = ()=> {
 	</div>
 }
 
-export default Client
+export default Customer
