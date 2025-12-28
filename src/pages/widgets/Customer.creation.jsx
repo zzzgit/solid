@@ -17,7 +17,7 @@ const CustomerCreationDialog = (props)=> {
 	const handleCommit = ()=> {
 		console.log('Form Data:', formData())
 		createCustomer(formData()).then((result)=> {
-			console.log('Customer created:', result)
+			props.onCreated?.(result)
 			alert('Customer created successfully!')
 			handleClose()
 			return null
