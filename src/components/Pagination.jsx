@@ -3,16 +3,16 @@ import { Pagination } from '@ark-ui/solid/pagination'
 import { css } from '@emotion/css'
 
 export const Pagin = (props)=> {
-	// const pager = createMemo(()=> props.pager || {
-	// 	total: 100, pageSize: 20, currentPage: 1,
-	// })
-	const pager = {
+	const pager = createMemo(()=> props.pager || {
 		total: 100, pageSize: 20, currentPage: 1,
+	})
+	const pages = ()=> {
+		return [{ type: 'page', value: 1 }, { type: 'page', value: 2 }, { type: 'ellipsis' }, { type: 'page', value: 10 }, { type: 'page', value: 11 }]
 	}
-	return <Pagination.Root onPageChange={props.onPageChange} class={containerCss} count={pager.total} pageSize={pager.pageSize} siblingCount={2}>
+	return <Pagination.Root onPageChange={props.onPageChange} class={containerCss} count={pager().total} pageSize={pager().pageSize} siblingCount={2}>
 		<Pagination.PrevTrigger class={buttonCss}>Previous Page</Pagination.PrevTrigger>
 		<Pagination.Context>
-			<For each={[{ type: 'page', value: 1 }, { type: 'page', value: 2 }, { type: 'ellipsis' }, { type: 'page', value: 10 }, { type: 'page', value: 11 }]}>
+			<For each={pages()}>
 				{(page, index)=> {
 					if(page.type === 'page'){
 						return <Pagination.Item class={itemCss} {...page}>{page.value}</Pagination.Item>
