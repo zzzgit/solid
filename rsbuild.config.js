@@ -11,6 +11,9 @@ export default defineConfig({
 	html: {
 		template: './index.html',
 	},
+	server: {
+		port: 2999,
+	},
 	plugins: [
 		pluginBabel({ include: /\.(?:jsx|tsx)$/ }),
 		pluginSolid(),

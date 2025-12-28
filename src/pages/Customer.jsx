@@ -13,7 +13,7 @@ const Customer = ()=> {
 	const [searchGender, setSearchGender] = createSignal('')
 	const [pager, setPager] = createSignal({
 		total: 0,
-		pageSize: 20,
+		pageSize: 3,
 		currentPage: 1,
 	})
 
@@ -55,9 +55,6 @@ const Customer = ()=> {
 
 	const handlePageChange = (newPage)=> {
 		console.log('Page changed to:', newPage)
-		if(window){
-			return null
-		}
 		const params = {}
 		if (searchId()){ params.id = searchId() }
 		if (searchName()){ params.name = searchName() }
@@ -65,7 +62,7 @@ const Customer = ()=> {
 
 		const newPager = {
 			...pager(),
-			currentPage: newPage,
+			currentPage: newPage.page,
 		}
 		searchCustomers(params, newPager).then((response)=> {
 			if (response.data){

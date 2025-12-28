@@ -14,7 +14,7 @@ A minimal SolidJS app using Rsbuild as the build tool (no TypeScript).
 npm run dev
 ```
 
-Dev server will print the local URL (typically http://localhost:3000 or 3001).
+Dev server will print the local URL (typically http://localhost:2999 ).
 
 ## Build
 

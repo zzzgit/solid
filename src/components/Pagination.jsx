@@ -7,7 +7,33 @@ export const Pagin = (props)=> {
 		total: 100, pageSize: 20, currentPage: 1,
 	})
 	const pages = ()=> {
-		return [{ type: 'page', value: 1 }, { type: 'page', value: 2 }, { type: 'ellipsis' }, { type: 'page', value: 10 }, { type: 'page', value: 11 }]
+		const totalPages = Math.ceil(pager().total / pager().pageSize)
+
+		// 如果总页数小于等于6，显示所有页码
+		if (totalPages <= 6){
+			return Array.from({ length: totalPages }, (_, i)=> ({
+				type: 'page',
+				value: i + 1,
+			}))
+		}
+
+		// 否则显示前3页 + 省略号 + 后3页
+		const result = []
+
+		// 前3页
+		for (let i = 1; i <= 3; i++){
+			result.push({ type: 'page', value: i })
+		}
+
+		// 省略号
+		result.push({ type: 'ellipsis' })
+
+		// 后3页
+		for (let i = totalPages - 2; i <= totalPages; i++){
+			result.push({ type: 'page', value: i })
+		}
+
+		return result
 	}
 	return <Pagination.Root onPageChange={props.onPageChange} class={containerCss} count={pager().total} pageSize={pager().pageSize} siblingCount={2}>
 		<Pagination.PrevTrigger class={buttonCss}>Previous Page</Pagination.PrevTrigger>
