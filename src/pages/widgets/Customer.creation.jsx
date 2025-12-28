@@ -14,7 +14,7 @@ const CustomerCreationDialog = (props)=> {
 		setFormData({ ...formData(), [field]: value })
 	}
 
-	const handleCommit = async()=> {
+	const handleCommit = ()=> {
 		console.log('Form Data:', formData())
 		createCustomer(formData()).then((result)=> {
 			console.log('Customer created:', result)

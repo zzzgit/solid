@@ -5,16 +5,7 @@ import CustomerCreationDialog from './widgets/Customer.creation.jsx'
 // page 永遠不用設置padding margin
 
 const Customer = ()=> {
-	const [tableData, setTableData] = createSignal([{
-		id: 1,
-		name: 'Loading...',
-		gender: null,
-		phone: null,
-		email: null,
-		extra: null,
-		createdAt: new Date(),
-		updatedAt: new Date(),
-	}])
+	const [tableData, setTableData] = createSignal([])
 	const [isDialogOpen, setIsDialogOpen] = createSignal(false)
 
 	onMount(()=> {
@@ -59,7 +50,6 @@ const Customer = ()=> {
 					<Table.Cell>Name</Table.Cell>
 					<Table.Cell>Gender</Table.Cell>
 					<Table.Cell>Phone</Table.Cell>
-					<Table.Cell>Email</Table.Cell>
 					<Table.Cell>Extra</Table.Cell>
 					<Table.Cell>Created At</Table.Cell>
 					<Table.Cell>Updated At</Table.Cell>
@@ -72,7 +62,6 @@ const Customer = ()=> {
 						<Table.Cell>{client.name}</Table.Cell>
 						<Table.Cell>{client.gender || '-'}</Table.Cell>
 						<Table.Cell>{client.phone || '-'}</Table.Cell>
-						<Table.Cell>{client.email || '-'}</Table.Cell>
 						<Table.Cell>{client.extra || '-'}</Table.Cell>
 						<Table.Cell>{new Date(client.createdAt).toLocaleString()}</Table.Cell>
 						<Table.Cell>{new Date(client.updatedAt).toLocaleString()}</Table.Cell>
