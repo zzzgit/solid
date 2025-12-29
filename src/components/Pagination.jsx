@@ -9,27 +9,22 @@ export const Pagin = (props)=> {
 	const pages = ()=> {
 		const totalPages = Math.ceil(pager().total / pager().pageSize)
 
-		// 如果总页数小于等于6，显示所有页码
-		if (totalPages <= 6){
+		if (totalPages <= 5){
 			return Array.from({ length: totalPages }, (_, i)=> ({
 				type: 'page',
 				value: i + 1,
 			}))
 		}
 
-		// 否则显示前3页 + 省略号 + 后3页
 		const result = []
 
-		// 前3页
 		for (let i = 1; i <= 3; i++){
 			result.push({ type: 'page', value: i })
 		}
 
-		// 省略号
 		result.push({ type: 'ellipsis' })
 
-		// 后3页
-		for (let i = totalPages - 2; i <= totalPages; i++){
+		for (let i = totalPages - 1; i <= totalPages; i++){
 			result.push({ type: 'page', value: i })
 		}
 
