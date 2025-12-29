@@ -18,14 +18,7 @@ const Customer = ()=> {
 	})
 
 	onMount(()=> {
-		searchCustomers().then((response)=> {
-			if (response.data){
-				setTableData(response.data)
-			}
-			return null
-		}).catch((err)=> {
-			console.error('Error fetching customers:', err)
-		})
+		fetchCustomers({}, pager())
 	})
 
 	const handleSearch = ()=> {
@@ -34,15 +27,7 @@ const Customer = ()=> {
 		if (searchName()){ params.name = searchName() }
 		if (searchGender()){ params.gender = searchGender() }
 
-		searchCustomers(params, pager()).then((response)=> {
-			if (response.data){
-				setTableData(response.data)
-				setPager(response.pager)
-			}
-			return null
-		}).catch((err)=> {
-			console.error('Error searching customers:', err)
-		})
+		fetchCustomers(params, pager())
 	}
 
 	const handleOpenDialog = ()=> {
@@ -51,6 +36,18 @@ const Customer = ()=> {
 
 	const handleCloseDialog = ()=> {
 		setIsDialogOpen(false)
+	}
+
+	const fetchCustomers = (conditions, pager)=> {
+		return searchCustomers(conditions, pager).then((response)=> {
+			if (response.data){
+				setTableData(response.data)
+				setPager(response.pager)
+			}
+			return null
+		}).catch((err)=> {
+			console.error('Error fetching customers:', err)
+		})
 	}
 
 	const handlePageChange = (newPage)=> {
