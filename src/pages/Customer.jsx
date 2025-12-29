@@ -51,7 +51,6 @@ const Customer = ()=> {
 	}
 
 	const handlePageChange = (newPage)=> {
-		console.log('Page changed to:', newPage)
 		const params = {}
 		if (searchId()){ params.id = searchId() }
 		if (searchName()){ params.name = searchName() }

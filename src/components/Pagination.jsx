@@ -8,7 +8,6 @@ export const Pagin = (props)=> {
 	})
 	const pages = ()=> {
 		const totalPages = Math.ceil(pager().total / pager().pageSize)
-
 		if (totalPages <= 5){
 			return Array.from({ length: totalPages }, (_, i)=> ({
 				type: 'page',
@@ -27,21 +26,20 @@ export const Pagin = (props)=> {
 		for (let i = totalPages - 1; i <= totalPages; i++){
 			result.push({ type: 'page', value: i })
 		}
-
 		return result
 	}
 	return <Pagination.Root onPageChange={props.onPageChange} class={containerCss} count={pager().total} pageSize={pager().pageSize} siblingCount={2}>
 		<Pagination.PrevTrigger class={buttonCss}>Previous Page</Pagination.PrevTrigger>
 		<Pagination.Context>
-			<For each={pages()}>
+			{pagination=> <For each={pagination().pages}>
 				{(page, index)=> {
-					if(page.type === 'page'){
-						return <Pagination.Item class={itemCss} {...page}>{page.value}</Pagination.Item>
+					if (page.type === 'page'){
+						return <Pagination.Item class={itemCss} value={page.value}>{page.value}</Pagination.Item>
 					}
 					return <Pagination.Ellipsis class={ellipsisCss} index={index()}>&#8230;</Pagination.Ellipsis>
-				}
-				}
+				}}
 			</For>
+			}
 		</Pagination.Context>
 		<Pagination.NextTrigger class={buttonCss}>Next Page</Pagination.NextTrigger>
 	</Pagination.Root>
