@@ -55,13 +55,13 @@ const Body = (rawProps)=> {
 	}
 	return (
 		<TableContext.Provider value={{ variant: 'body' }}>
-			<tbody class={commonProps.class} >
+			<tbody class={commonProps.class} classList={{ [emptyBodyStyle]: !hasChildren() }} >
 				<Switch>
 					<Match when={hasChildren()}>
 						{commonProps.children}
 					</Match>
 					<Match when={!hasChildren()}>
-						<tr>
+						<tr class={emptyRowStyle}>
 							<td class={emptyStateStyle} colSpan={100}>{props.emptyText || 'walang laman'}</td>
 						</tr>
 					</Match>
@@ -181,7 +181,18 @@ td {
 `
 
 const emptyStateStyle = css`
-	text-align: center;
-	padding: 12px;
-	color: #666;
+    text-align: center;
+    padding: 12px;
+    color: #666;
+`
+const emptyRowStyle = css`
+    height: 100%;
+    & > td {
+        height: 100%;
+        vertical-align: middle;
+        padding: 12px;
+    }
+`
+const emptyBodyStyle = css`
+    height: 100%;
 `

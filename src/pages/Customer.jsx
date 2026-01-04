@@ -127,7 +127,9 @@ const Customer = ()=> {
 				Search
 			</button>
 		</div>
-		<TableContainer style ={{ 'min-height': '540px' }}>
+		<TableContainer style ={{
+			'min-height': '540px',
+		}}>
 			<Table columned class='fooooo' size='md'>
 				<Table.Head>
 					<Table.Row>
