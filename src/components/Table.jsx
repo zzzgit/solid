@@ -1,9 +1,15 @@
 import {
-	Match, Switch, children, createContext, mergeProps, splitProps, useContext,
+	Match, Switch, children, createContext, createSignal, mergeProps, splitProps, useContext,
 } from 'solid-js'
 import { css } from '@emotion/css'
 
-const TableContext = createContext({ variant: '' })
+const TableContext = createContext({
+	variant: '',
+	checkable: false,
+	onChecked: null,
+	selectedRows: ()=> [],
+	toggleRowSelection: null,
+})
 
 const Cell = (props)=> {
 	const variant = useContext(TableContext).variant
@@ -26,19 +32,47 @@ const Cell = (props)=> {
 
 const Row = (rawProps)=> {
 	const withDefaults = mergeProps({ }, rawProps)
-	const [commonProps, props] = splitProps(withDefaults, ['children', 'class'])
+	const [commonProps] = splitProps(withDefaults, ['children', 'class', 'data'])
+	const tableContext = useContext(TableContext)
+	const isCheckable = ()=> tableContext.checkable
+	const isSelected = ()=> {
+		if (commonProps.data === undefined){ return false }
+		const rows = tableContext.selectedRows?.() ?? []
+		return rows.includes(commonProps.data)
+	}
+	const handleCheckboxChange = (e)=> {
+		if (!tableContext.toggleRowSelection || commonProps.data === undefined){
+			return
+		}
+		tableContext.toggleRowSelection(commonProps.data, e.currentTarget.checked)
+	}
 	return (
 		<tr class={commonProps.class} >
+			{isCheckable() && <td class={checkboxCellStyle}>
+				<input
+					type='checkbox'
+					checked={isSelected()}
+					onChange={handleCheckboxChange}
+					class={checkboxStyle}
+				/>
+			</td>
+			}
 			{commonProps.children}
 		</tr>
 	)
 }
 const Head = (rawProps)=> {
 	const withDefaults = mergeProps({ }, rawProps)
-	const [commonProps, props] = splitProps(withDefaults, ['children', 'class'])
+	const [commonProps] = splitProps(withDefaults, ['children', 'class'])
+	const tableContext = useContext(TableContext)
 	return (
-		<TableContext.Provider value={{ variant: 'head' }}>
+		<TableContext.Provider value={{
+			...tableContext,
+			variant: 'head',
+		}}>
 			<thead class={commonProps.class} >
+				{tableContext.checkable && <th class={checkboxHeaderStyle} />
+				}
 				{commonProps.children}
 			</thead>
 		</TableContext.Provider>
@@ -48,13 +82,17 @@ const Body = (rawProps)=> {
 	const withDefaults = mergeProps({ emptyText: 'No data' }, rawProps)
 	const [commonProps, props] = splitProps(withDefaults, ['children', 'class', 'emptyText'])
 	const resolved = children(()=> commonProps.children)
+	const tableContext = useContext(TableContext)
 	const hasChildren = ()=> {
 		const r = resolved()
 		if (Array.isArray(r)){ return r.length > 0 }
 		return !!r
 	}
 	return (
-		<TableContext.Provider value={{ variant: 'body' }}>
+		<TableContext.Provider value={{
+			...tableContext,
+			variant: 'body',
+		}}>
 			<tbody class={commonProps.class} classList={{ [emptyBodyStyle]: !hasChildren() }} >
 				<Switch>
 					<Match when={hasChildren()}>
@@ -73,9 +111,10 @@ const Body = (rawProps)=> {
 
 const Foot = (rawProps)=> {
 	const withDefaults = mergeProps({ }, rawProps)
-	const [commonProps, props] = splitProps(withDefaults, ['children', 'class'])
+	const [commonProps] = splitProps(withDefaults, ['children', 'class'])
+	const tableContext = useContext(TableContext)
 	return (
-		<TableContext.Provider value={{ variant: 'foot' }}>
+		<TableContext.Provider value={{ ...tableContext, variant: 'foot' }}>
 			<tfoot class={commonProps.class} >
 				{commonProps.children}
 			</tfoot>
@@ -84,23 +123,46 @@ const Foot = (rawProps)=> {
 }
 
 const Table = (props)=> {
+	const [selectedRows, setSelectedRows] = createSignal([])
+	const toggleRowSelection = (rowData, checked)=> {
+		if (rowData === undefined){
+			return
+		}
+		setSelectedRows((prev)=> {
+			const alreadySelected = prev.includes(rowData)
+			const nextSelection = checked ? alreadySelected ? prev : [...prev, rowData] : prev.filter(item=> item !== rowData)
+			if (props.onChecked){
+				props.onChecked(nextSelection)
+			}
+			return nextSelection
+		})
+	}
 	const tableSizes = {
 		sm: 'small',
 		md: 'medium',
 		lg: 'large',
 	}
 	const size = tableSizes[props.size || 'md']
+	const value = {
+		variant: '',
+		checkable: props.checkable,
+		onChecked: props.onChecked,
+		selectedRows,
+		toggleRowSelection,
+	}
 	return (
-		<table
-			class={tableStyle}
-			classList={{
-				[props.class]: true,
-				[size]: true,
-				striped: props.striped,
-				columned: props.columned,
-			}} >
-			{props.children}
-		</table>
+		<TableContext.Provider value={value}>
+			<table
+				class={tableStyle}
+				classList={{
+					[props.class]: true,
+					[size]: true,
+					striped: props.striped,
+					columned: props.columned,
+				}} >
+				{props.children}
+			</table>
+		</TableContext.Provider>
 	)
 }
 
@@ -195,4 +257,20 @@ const emptyRowStyle = css`
 `
 const emptyBodyStyle = css`
     height: 100%;
+`
+
+const checkboxCellStyle = css`
+    width: 40px;
+    text-align: center;
+`
+
+const checkboxHeaderStyle = css`
+    width: 40px;
+    border-bottom: 1px solid rgb(228,228,231);
+`
+
+const checkboxStyle = css`
+    cursor: pointer;
+    width: 16px;
+    height: 16px;
 `
