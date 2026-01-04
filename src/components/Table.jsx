@@ -75,6 +75,7 @@ const Table = (props)=> {
 		lg: 'large',
 	}
 	const size = tableSizes[props.size || 'md']
+	const showHorizontal = props.columned
 	return (
 		<table
 			class={tableStyle}
@@ -82,6 +83,7 @@ const Table = (props)=> {
 				[props.class]: true,
 				[size]: true,
 				striped: props.striped,
+				columned: showHorizontal,
 			}} >
 			{props.children}
 		</table>
@@ -126,6 +128,15 @@ td {
 	}
 	td {
 		border-bottom: none;
+	}
+}
+&.columned {
+	border-left: 1px solid rgb(228,228,231);
+	th {
+		border-right: 1px solid rgb(228,228,231);
+	}
+	td {
+		border-right: 1px solid rgb(228,228,231);
 	}
 }
 &.small {

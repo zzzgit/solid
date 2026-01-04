@@ -128,7 +128,7 @@ const Customer = ()=> {
 			</button>
 		</div>
 		<TableContainer style ={{ 'min-height': '540px' }}>
-			<Table class='fooooo' size='md'>
+			<Table columned class='fooooo' size='md'>
 				<Table.Head>
 					<Table.Row>
 						<Table.Cell>ID</Table.Cell>
