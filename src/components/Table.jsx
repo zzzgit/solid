@@ -48,14 +48,14 @@ const Row = (rawProps)=> {
 	}
 	return (
 		<tr class={commonProps.class} >
-			{isCheckable() && <td class={checkboxCellStyle}>
+			{isCheckable() && <th class={checkboxCellStyle}>
 				<input
 					type='checkbox'
 					checked={isSelected()}
 					onChange={handleCheckboxChange}
 					class={checkboxStyle}
 				/>
-			</td>
+			</th>
 			}
 			{commonProps.children}
 		</tr>
