@@ -13,7 +13,6 @@ const MainView = (props)=> {
 				<Nav />
 			</aside>
 			<article>
-				<div>steps</div>
 				{props.children}
 			</article>
 		</main>
