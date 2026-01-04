@@ -1,5 +1,5 @@
 import {
-	Match, Switch, createContext, mergeProps, splitProps, useContext,
+	Match, Switch, children, createContext, mergeProps, splitProps, useContext,
 } from 'solid-js'
 import { css } from '@emotion/css'
 
@@ -45,12 +45,27 @@ const Head = (rawProps)=> {
 	)
 }
 const Body = (rawProps)=> {
-	const withDefaults = mergeProps({ }, rawProps)
-	const [commonProps, props] = splitProps(withDefaults, ['children', 'class'])
+	const withDefaults = mergeProps({ emptyText: 'No data' }, rawProps)
+	const [commonProps, props] = splitProps(withDefaults, ['children', 'class', 'emptyText'])
+	const resolved = children(()=> commonProps.children)
+	const hasChildren = ()=> {
+		const r = resolved()
+		if (Array.isArray(r)){ return r.length > 0 }
+		return !!r
+	}
 	return (
 		<TableContext.Provider value={{ variant: 'body' }}>
 			<tbody class={commonProps.class} >
-				{commonProps.children}
+				<Switch>
+					<Match when={hasChildren()}>
+						{commonProps.children}
+					</Match>
+					<Match when={!hasChildren()}>
+						<tr>
+							<td class={emptyStateStyle} colSpan={100}>{props.emptyText || 'walang laman'}</td>
+						</tr>
+					</Match>
+				</Switch>
 			</tbody>
 		</TableContext.Provider>
 	)
@@ -75,7 +90,6 @@ const Table = (props)=> {
 		lg: 'large',
 	}
 	const size = tableSizes[props.size || 'md']
-	const showHorizontal = props.columned
 	return (
 		<table
 			class={tableStyle}
@@ -83,7 +97,7 @@ const Table = (props)=> {
 				[props.class]: true,
 				[size]: true,
 				striped: props.striped,
-				columned: showHorizontal,
+				columned: props.columned,
 			}} >
 			{props.children}
 		</table>
@@ -164,4 +178,10 @@ td {
 	}
 }
 
+`
+
+const emptyStateStyle = css`
+	text-align: center;
+	padding: 12px;
+	color: #666;
 `
