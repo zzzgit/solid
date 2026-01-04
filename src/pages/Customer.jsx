@@ -73,6 +73,10 @@ const Customer = ()=> {
 		})
 	}
 
+	const handleRowChecked = (rowData)=> {
+		console.log('Row checked:', rowData)
+	}
+
 	return <div>
 		<div style={{
 			display: 'flex', 'justify-content': 'space-between', 'align-items': 'center', 'margin-bottom': '20px',
@@ -130,7 +134,7 @@ const Customer = ()=> {
 		<TableContainer style ={{
 			'min-height': '540px',
 		}}>
-			<Table columned class='fooooo' size='md'>
+			<Table columned class='fooooo' size='md' checkable onChecked={handleRowChecked}>
 				<Table.Head>
 					<Table.Row>
 						<Table.Cell>ID</Table.Cell>
@@ -144,14 +148,14 @@ const Customer = ()=> {
 				</Table.Head>
 				<Table.Body>
 					<For each={tableData()}>
-						{client=> <Table.Row key={client.id}>
-							<Table.Cell>{client.id}</Table.Cell>
-							<Table.Cell>{client.name}</Table.Cell>
-							<Table.Cell>{client.gender || '-'}</Table.Cell>
-							<Table.Cell>{client.phone || '-'}</Table.Cell>
-							<Table.Cell>{new Date(client.createdAt).toLocaleString()}</Table.Cell>
-							<Table.Cell>{new Date(client.updatedAt).toLocaleString()}</Table.Cell>
-							<Table.Cell>{client.extra || '-'}</Table.Cell>
+						{rowData=> <Table.Row key={rowData.id} data={rowData}>
+							<Table.Cell>{rowData.id}</Table.Cell>
+							<Table.Cell>{rowData.name}</Table.Cell>
+							<Table.Cell>{rowData.gender || '-'}</Table.Cell>
+							<Table.Cell>{rowData.phone || '-'}</Table.Cell>
+							<Table.Cell>{new Date(rowData.createdAt).toLocaleString()}</Table.Cell>
+							<Table.Cell>{new Date(rowData.updatedAt).toLocaleString()}</Table.Cell>
+							<Table.Cell>{rowData.extra || '-'}</Table.Cell>
 						</Table.Row>
 						}
 					</For>
