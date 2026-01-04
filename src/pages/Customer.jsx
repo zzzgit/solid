@@ -3,6 +3,8 @@ import Table from '../components/Table.jsx'
 import { searchCustomers } from '../api.js'
 import CustomerCreationDialog from './widgets/Customer.creation.jsx'
 import Pagination from '../components/Pagination.jsx'
+import TableContainer from '../components/TableContainer.jsx'
+
 // page 永遠不用設置padding margin
 
 const Customer = ()=> {
@@ -13,9 +15,21 @@ const Customer = ()=> {
 	const [searchGender, setSearchGender] = createSignal('')
 	const [pager, setPager] = createSignal({
 		total: 0,
-		pageSize: 3,
+		pageSize: 10,
 		currentPage: 1,
 	})
+
+	const fetchCustomers = (conditions, pager)=> {
+		return searchCustomers(conditions, pager).then((response)=> {
+			if (response.data){
+				setTableData(response.data)
+				setPager(response.pager)
+			}
+			return null
+		}).catch((err)=> {
+			console.error('Error fetching customers:', err)
+		})
+	}
 
 	onMount(()=> {
 		fetchCustomers({}, pager())
@@ -36,18 +50,6 @@ const Customer = ()=> {
 
 	const handleCloseDialog = ()=> {
 		setIsDialogOpen(false)
-	}
-
-	const fetchCustomers = (conditions, pager)=> {
-		return searchCustomers(conditions, pager).then((response)=> {
-			if (response.data){
-				setTableData(response.data)
-				setPager(response.pager)
-			}
-			return null
-		}).catch((err)=> {
-			console.error('Error fetching customers:', err)
-		})
 	}
 
 	const handlePageChange = (newPage)=> {
@@ -125,34 +127,35 @@ const Customer = ()=> {
 				Search
 			</button>
 		</div>
-
-		<Table class='fooooo' size='md'>
-			<Table.Head>
-				<Table.Row>
-					<Table.Cell>ID</Table.Cell>
-					<Table.Cell>Name</Table.Cell>
-					<Table.Cell>Gender</Table.Cell>
-					<Table.Cell>Phone</Table.Cell>
-					<Table.Cell>Created At</Table.Cell>
-					<Table.Cell>Updated At</Table.Cell>
-					<Table.Cell>Extra</Table.Cell>
-				</Table.Row>
-			</Table.Head>
-			<Table.Body>
-				<For each={tableData()}>
-					{client=> <Table.Row >
-						<Table.Cell>{client.id}</Table.Cell>
-						<Table.Cell>{client.name}</Table.Cell>
-						<Table.Cell>{client.gender || '-'}</Table.Cell>
-						<Table.Cell>{client.phone || '-'}</Table.Cell>
-						<Table.Cell>{new Date(client.createdAt).toLocaleString()}</Table.Cell>
-						<Table.Cell>{new Date(client.updatedAt).toLocaleString()}</Table.Cell>
-						<Table.Cell>{client.extra || '-'}</Table.Cell>
+		<TableContainer style ={{ 'min-height': '540px' }}>
+			<Table class='fooooo' size='md'>
+				<Table.Head>
+					<Table.Row>
+						<Table.Cell>ID</Table.Cell>
+						<Table.Cell>Name</Table.Cell>
+						<Table.Cell>Gender</Table.Cell>
+						<Table.Cell>Phone</Table.Cell>
+						<Table.Cell>Created At</Table.Cell>
+						<Table.Cell>Updated At</Table.Cell>
+						<Table.Cell>Extra</Table.Cell>
 					</Table.Row>
-					}
-				</For>
-			</Table.Body>
-		</Table>
+				</Table.Head>
+				<Table.Body>
+					<For each={tableData()}>
+						{client=> <Table.Row key={client.id}>
+							<Table.Cell>{client.id}</Table.Cell>
+							<Table.Cell>{client.name}</Table.Cell>
+							<Table.Cell>{client.gender || '-'}</Table.Cell>
+							<Table.Cell>{client.phone || '-'}</Table.Cell>
+							<Table.Cell>{new Date(client.createdAt).toLocaleString()}</Table.Cell>
+							<Table.Cell>{new Date(client.updatedAt).toLocaleString()}</Table.Cell>
+							<Table.Cell>{client.extra || '-'}</Table.Cell>
+						</Table.Row>
+						}
+					</For>
+				</Table.Body>
+			</Table>
+		</TableContainer>
 		<Pagination pager={pager()} onPageChange={handlePageChange} />
 
 		<CustomerCreationDialog
