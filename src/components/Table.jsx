@@ -41,6 +41,7 @@ const Row = (rawProps)=> {
 		return rows.includes(commonProps.data)
 	}
 	const handleCheckboxChange = (e)=> {
+		console.log(222, e)
 		if (!tableContext.toggleRowSelection || commonProps.data === undefined){
 			return
 		}
@@ -48,14 +49,14 @@ const Row = (rawProps)=> {
 	}
 	return (
 		<tr class={commonProps.class} >
-			{isCheckable() && <th class={checkboxCellStyle}>
+			{isCheckable() && <td class={checkboxCellStyle}>
 				<input
 					type='checkbox'
 					checked={isSelected()}
 					onChange={handleCheckboxChange}
 					class={checkboxStyle}
 				/>
-			</th>
+			</td>
 			}
 			{commonProps.children}
 		</tr>
@@ -71,8 +72,6 @@ const Head = (rawProps)=> {
 			variant: 'head',
 		}}>
 			<thead class={commonProps.class} >
-				{tableContext.checkable && <th class={checkboxHeaderStyle} />
-				}
 				{commonProps.children}
 			</thead>
 		</TableContext.Provider>
