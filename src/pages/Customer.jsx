@@ -4,6 +4,7 @@ import { deleteCustomerById, deleteCustomers, searchCustomers } from '../api.js'
 import CustomerCreationDialog from './widgets/Customer.creation.jsx'
 import Pagination from '../components/Pagination.jsx'
 import TableContainer from '../components/TableContainer.jsx'
+import Button from '../components/Button.jsx'
 
 // page 永遠不用設置padding margin
 
@@ -164,14 +165,7 @@ const Customer = ()=> {
 			>
 				Create
 			</button>
-			<button
-				onClick={handleDelete}
-				style={{
-					padding: '8px 16px', 'background-color': '#ef4444', color: 'white', border: 'none', 'border-radius': '4px', cursor: 'pointer',
-				}}
-			>
-				Delete {checkedRows().length > 0 && `(${checkedRows().length})`}
-			</button>
+			<Button onClick={handleDelete}>Delete {checkedRows().length > 0 && `(${checkedRows().length})`}</Button>
 		</div>
 		<TableContainer style ={{
 			'min-height': '540px',
