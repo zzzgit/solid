@@ -165,7 +165,7 @@ const Customer = ()=> {
 			>
 				Create
 			</button>
-			<Button onClick={handleDelete}>Delete {checkedRows().length > 0 && `(${checkedRows().length})`}</Button>
+			<Button onClick={handleDelete} disabled={checkedRows().length === 0}>Delete {checkedRows().length > 0 && `(${checkedRows().length})`}</Button>
 		</div>
 		<TableContainer style ={{
 			'min-height': '540px',
