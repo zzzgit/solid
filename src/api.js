@@ -1,4 +1,4 @@
-import { doGet, doPost } from './http.js'
+import { doDelete, doGet, doPost } from './http.js'
 
 // 禁止使用
 export const getCustomers = ()=> {
@@ -11,6 +11,14 @@ export const getCustomerById = (id)=> {
 
 export const createCustomer = (customerObject)=> {
 	return doPost('customers', customerObject)
+}
+
+export const deleteCustomerById = (id)=> {
+	return doDelete(`customers/${id}`)
+}
+
+export const deleteCustomers = (ids)=> {
+	return doDelete('customers', ids)
 }
 
 export const searchCustomers = (params, pager)=> {

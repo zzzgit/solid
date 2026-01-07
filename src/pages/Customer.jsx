@@ -1,6 +1,6 @@
 import { For, createSignal, onMount } from 'solid-js'
 import Table from '../components/Table.jsx'
-import { searchCustomers } from '../api.js'
+import { deleteCustomerById, deleteCustomers, searchCustomers } from '../api.js'
 import CustomerCreationDialog from './widgets/Customer.creation.jsx'
 import Pagination from '../components/Pagination.jsx'
 import TableContainer from '../components/TableContainer.jsx'
@@ -13,6 +13,7 @@ const Customer = ()=> {
 	const [searchId, setSearchId] = createSignal('')
 	const [searchName, setSearchName] = createSignal('')
 	const [searchGender, setSearchGender] = createSignal('')
+	const [checkedRows, setCheckedRows] = createSignal([])
 	const [pager, setPager] = createSignal({
 		total: 0,
 		pageSize: 10,
@@ -23,7 +24,7 @@ const Customer = ()=> {
 		return searchCustomers(conditions, pager).then((response)=> {
 			if (response.data){
 				setTableData(response.data)
-				setPager(response.pager)
+				setPager(response.meta.pagination)
 			}
 			return null
 		}).catch((err)=> {
@@ -74,23 +75,42 @@ const Customer = ()=> {
 	}
 
 	const handleRowChecked = (rowData)=> {
-		console.log('Row checked:', rowData)
+		setCheckedRows(rowData)
+	}
+
+	const handleDelete = async()=> {
+		const rowsToDelete = checkedRows()
+
+		if (rowsToDelete.length === 0){
+			alert('請選擇要刪除的行')
+			return
+		}
+
+		if (!confirm(`確定要刪除 ${rowsToDelete.length} 條記錄嗎？`)){
+			return
+		}
+
+		if(rowsToDelete.length === 1){
+			// 此處成功則返回204
+			deleteCustomerById(rowsToDelete[0].id).then(()=> {
+				console.log('Deleted single row:', rowsToDelete[0].id)
+				return null
+			}).catch((err)=> {
+				console.error('Error deleting single row:', err)
+			})
+			return null
+		}
+		// 多選
+		const ids = rowsToDelete.map(r=> r.id)
+		deleteCustomers(ids).then(()=> {
+			console.log('Deleted multiple rows:', ids)
+			return null
+		}).catch((err)=> {
+			console.error('Error deleting multiple rows:', err)
+		})
 	}
 
 	return <div>
-		<div style={{
-			display: 'flex', 'justify-content': 'space-between', 'align-items': 'center', 'margin-bottom': '20px',
-		}}>
-			<button
-				onClick={handleOpenDialog}
-				style={{
-					padding: '8px 16px', 'background-color': '#0070f3', color: 'white', border: 'none', 'border-radius': '4px', cursor: 'pointer',
-				}}
-			>
-				Create
-			</button>
-		</div>
-
 		{/* Search Bar */}
 		<div style={{
 			display: 'flex', gap: '10px', 'margin-bottom': '20px', 'align-items': 'center',
@@ -129,6 +149,28 @@ const Customer = ()=> {
 				}}
 			>
 				Search
+			</button>
+		</div>
+
+		{/* Action Buttons */}
+		<div style={{
+			display: 'flex', gap: '10px', 'margin-bottom': '20px',
+		}}>
+			<button
+				onClick={handleOpenDialog}
+				style={{
+					padding: '8px 16px', 'background-color': '#0070f3', color: 'white', border: 'none', 'border-radius': '4px', cursor: 'pointer',
+				}}
+			>
+				Create
+			</button>
+			<button
+				onClick={handleDelete}
+				style={{
+					padding: '8px 16px', 'background-color': '#ef4444', color: 'white', border: 'none', 'border-radius': '4px', cursor: 'pointer',
+				}}
+			>
+				Delete {checkedRows().length > 0 && `(${checkedRows().length})`}
 			</button>
 		</div>
 		<TableContainer style ={{

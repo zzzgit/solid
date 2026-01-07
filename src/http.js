@@ -30,4 +30,25 @@ const doPost = (endpoint, data)=> {
 	})
 }
 
-export { doGet, doPost }
+const doDelete = (endpoint, ids)=> {
+	const url = new URL(endpoint, baseUrl).href
+	return fetch(url, {
+		method: 'DELETE',
+		headers: {
+			'Content-Type': 'application/json',
+		},
+		body: JSON.stringify({ ids }),
+	}).then((response)=> {
+		if (!response.ok){
+			throw new Error(`HTTP error! status: ${response.status}`)
+		}
+		return response.json()
+	}).catch((error)=> {
+		console.error('Error in DELETE request:', error)
+		throw error
+	})
+}
+
+export {
+	doGet, doPost, doDelete,
+}
