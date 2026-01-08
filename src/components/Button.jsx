@@ -171,9 +171,9 @@ const Button = (props)=> {
 	}
 
 	return (
-		<div class={buttonClass()} {...others}>
+		<button class={buttonClass()} {...others}>
 			{local.children}
-		</div>
+		</button>
 	)
 }
 
