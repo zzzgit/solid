@@ -1,6 +1,9 @@
+import { css } from '@emotion/css'
+import Button from '../components/Button.jsx'
+
 export default function About(){
 	return (
-		<div>
+		<div class={containerStyle}>
 			<h1 style={{ color: '#1e293b', 'margin-bottom': '20px' }}>關於我們</h1>
 			<div style={{
 				'background-color': '#f1f5f9',
@@ -23,6 +26,11 @@ export default function About(){
 					<li>建立高效的開發流程</li>
 				</ul>
 			</div>
+			<Button color='red'>聯繫我們</Button>
 		</div>
 	)
 }
+
+const containerStyle = css`
+ 
+`

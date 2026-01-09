@@ -21,6 +21,7 @@
   "dependencies": {
     "@ark-ui/solid": "^5.30.0",
     "@emotion/css": "^11.13.5",
+    "@radix-ui/colors": "^3.0.0",
     "@solidjs/router": "^0.15.3",
     "lucide-solid": "^0.561.0",
     "solid-js": "^1.8.0"

@@ -1,4 +1,5 @@
 import './styles/reset.css'
+import './styles/color.css'
 import './global.css'
 import './styles/ark.css'
 import { render } from 'solid-js/web'
