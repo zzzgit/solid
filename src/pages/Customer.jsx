@@ -143,29 +143,14 @@ const Customer = ()=> {
 					padding: '8px 12px', border: '1px solid #ddd', 'border-radius': '4px', flex: '1',
 				}}
 			/>
-			<button
-				onClick={handleSearch}
-				style={{
-					padding: '8px 20px', 'background-color': '#10b981', color: 'white', border: 'none', 'border-radius': '4px', cursor: 'pointer', 'white-space': 'nowrap',
-				}}
-			>
-				Search
-			</button>
+			<Button size='sm' onClick={handleSearch} variant='solid'>Search</Button>
 		</div>
 
-		{/* Action Buttons */}
 		<div style={{
 			display: 'flex', gap: '10px', 'margin-bottom': '20px',
 		}}>
-			<button
-				onClick={handleOpenDialog}
-				style={{
-					padding: '8px 16px', 'background-color': '#0070f3', color: 'white', border: 'none', 'border-radius': '4px', cursor: 'pointer',
-				}}
-			>
-				Create
-			</button>
-			<Button onClick={handleDelete} disabled={checkedRows().length === 0}>Delete {checkedRows().length > 0 && `(${checkedRows().length})`}</Button>
+			<Button size='sm' onClick={handleOpenDialog} expression='success' variant='solid'>Create</Button>
+			<Button size='sm' onClick={handleDelete} variant='solid' expression='danger' disabled={checkedRows().length === 0}>Delete {checkedRows().length > 0 && `(${checkedRows().length})`}</Button>
 		</div>
 		<TableContainer style ={{
 			'min-height': '540px',
