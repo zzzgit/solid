@@ -140,13 +140,13 @@ user-select: none;
 	background-color: var(--solid-background);
 	color: var(--solid-foreground);
 	// border-color: var(--accent-color);
-	&:hover {
+	&:not(:disabled):hover {
 		background-color: var(--solid-hover-background);
 	}
-	&:active {
+	&:not(:disabled):active {
 		background-color: var(--solid-active-background);
 	}
-	&:focus-visible {
+	&:not(:disabled):focus-visible {
 		outline: 2px solid var(--solid-background);
 		outline-offset: 2px;
 	}
@@ -155,13 +155,13 @@ user-select: none;
 	border: 1px solid var(--outline-border);
 	background-color: transparent;
 	color: var(--outline-foreground);
-	&:hover {
+	&:not(:disabled):hover {
 		background-color: var(--outline-hover-background);
 	}
-	&:active {
+	&:not(:disabled):active {
 		background-color: var(--outline-active-background);
 	}
-	&:focus-visible {
+	&:not(:disabled):focus-visible {
 		outline: 2px solid var(--outline-foreground);
 		outline-offset: 2px;
 	}
@@ -170,14 +170,14 @@ user-select: none;
 	border: 1px solid var(--surface-border-color);
 	background-color: var(--surface-background);
 	color: var(--surface-foreground);
-	&:hover {
+	&:not(:disabled):hover {
 		background-color: var(--surface-hover-background);
 		border-color: var(--surface-hover-border-color);
 	}
-	&:active {
+	&:not(:disabled):active {
 		background-color: var(--surface-active-background);
 	}
-	&:focus-visible {
+	&:not(:disabled):focus-visible {
 		outline: 2px solid var(--surface-foreground);
 		outline-offset: 2px;
 	}
