@@ -29,15 +29,16 @@ const Button = (props)=> {
 
 	return (
 		<button
-			classList={{
-				[sizeName()]: true,
-				[variantName()]: true,
-				disabled: local.disabled,
-			}}
-			class={containerStyle({
-				sizeName: sizeName(),
-				colorName: colorName(),
-			})}
+			class={[
+				containerStyle({
+					sizeName: sizeName(),
+					colorName: colorName(),
+				}),
+				sizeName(),
+				variantName(),
+				local.disabled && 'disabled',
+				local.class || local.className,
+			].filter(Boolean).join(' ')}
 			disabled={local.disabled}
 			{...others}
 		>
@@ -97,7 +98,6 @@ cursor: pointer;
 &.disabled {
 	opacity: 0.5;
 	cursor: not-allowed;
-	pointer-events: none;
 }
 
 `

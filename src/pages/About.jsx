@@ -30,10 +30,10 @@ export default function About(){
 				'margin-top': '30px', display: 'flex', gap: '10px',
 			}}>
 				<Button color='red' variant='solid'>聯繫我們</Button>
-				<Button color='red' variant='surface'>聯繫我們</Button>
+				<Button color='red' variant='surface' >聯繫我們</Button>
 				<Button color='red' variant='outline'>聯繫我們</Button>
 				<Button color='red' variant='solid'>聯繫我們</Button>
-				<Button color='red' size='lg'>聯繫我們</Button>
+				<Button color='red' size='lg' >聯繫我們</Button>
 				<Button color='red' size='sm'>聯繫我們</Button>
 
 			</div>
@@ -45,7 +45,18 @@ export default function About(){
 				<Button color='blue' size='md'variant='outline'>聯繫我們</Button>
 				<Button color='blue' size='lg'variant='solid'>聯繫我們</Button>
 				<Button color='blue' size='lg'>聯繫我們</Button>
-				<Button color='blue' size='xl'>聯繫我們</Button>
+				<Button color='blue' size='xl' >聯繫我們</Button>
+
+			</div>
+			<div style={{
+				'margin-top': '30px', display: 'flex', gap: '10px',
+			}}>
+				<Button color='purple' disabled size='sm'variant='solid'>聯繫我們</Button>
+				<Button color='purple' disabled size='md'variant='surface'>聯繫我們</Button>
+				<Button color='purple' disabled size='md'variant='outline'>聯繫我們</Button>
+				<Button color='purple' disabled size='lg'variant='solid'>聯繫我們</Button>
+				<Button color='purple' disabled size='lg'>聯繫我們</Button>
+				<Button color='purple' disabled size='xl' >聯繫我們</Button>
 
 			</div>
 		</div>
