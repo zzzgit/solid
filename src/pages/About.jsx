@@ -33,7 +33,7 @@ export default function About(){
 				<Button color='red' variant='surface' >聯繫我們</Button>
 				<Button color='red' variant='outline'>聯繫我們</Button>
 				<Button color='red' loading variant='solid'>聯繫我們</Button>
-				<Button color='red' size='lg' >聯繫我們</Button>
+				<Button color='red' size='lg' class='custom-class'>聯繫我們</Button>
 				<Button color='red' size='sm'>聯繫我們</Button>
 
 			</div>

@@ -14,12 +14,10 @@ const Button = (props)=> {
 		'size',
 		'color',
 		'class',
-		'className',
 		'disabled',
 		'loading',
 	])
 
-	// 計算size的class - 使用 getter 函數保持響應性
 	const validSizes = ['xs', 'sm', 'md', 'lg', 'xl', 'xxl']
 	const sizeName = createMemo(()=> {
 		const size = local.size || defaults.size
@@ -38,7 +36,7 @@ const Button = (props)=> {
 				sizeName(),
 				variantName(),
 				local.loading && 'loading',
-				local.class || local.className,
+				local.class,
 			].filter(Boolean).join(' ')}
 			disabled={local.disabled || local.loading}
 			{...others}
@@ -53,11 +51,14 @@ export default Button
 const containerStyle = ({ sizeName, colorName })=> css`
 --solid-background: var(--${colorName}-9);
 --solid-hover-background: var(--${colorName}-10);
+--solid-active-background: var(--${colorName}-11);
 --outline-border: var(--${colorName}-a7);
 --outline-foreground: var(--${colorName}-a11);
 --outline-hover-background: var(--${colorName}-a2);
+--outline-active-background: var(--${colorName}-a3);
 --surface-background: var(--${colorName}-2);
 --surface-hover-background: var(--${colorName}-3);
+--surface-active-background: var(--${colorName}-4);
 --surface-border-color: var(--${colorName}-6);
 --surface-hover-border-color: var(--${colorName}-7);
 --surface-foreground: var(--${colorName}-11);
@@ -78,6 +79,9 @@ user-select: none;
 	&:hover {
 		background-color: var(--solid-hover-background);
 	}
+	&:active {
+		background-color: var(--solid-active-background);
+	}
 }
 &.outline {
 	border: 1px solid var(--outline-border);
@@ -85,6 +89,9 @@ user-select: none;
 	color: var(--outline-foreground);
 	&:hover {
 		background-color: var(--outline-hover-background);
+	}
+	&:active {
+		background-color: var(--outline-active-background);
 	}
 }
 &.surface {
@@ -94,6 +101,9 @@ user-select: none;
 	&:hover {
 		background-color: var(--surface-hover-background);
 		border-color: var(--surface-hover-border-color);
+	}
+	&:active {
+		background-color: var(--surface-active-background);
 	}
 }
 
