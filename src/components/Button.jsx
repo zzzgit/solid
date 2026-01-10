@@ -15,6 +15,7 @@ const Button = (props)=> {
 		'color',
 		'class',
 		'className',
+		'disabled',
 	])
 
 	// 計算size的class - 使用 getter 函數保持響應性
@@ -28,11 +29,16 @@ const Button = (props)=> {
 
 	return (
 		<button
-			classList={{ [sizeName()]: true, [variantName()]: true }}
+			classList={{
+				[sizeName()]: true,
+				[variantName()]: true,
+				disabled: local.disabled,
+			}}
 			class={containerStyle({
 				sizeName: sizeName(),
 				colorName: colorName(),
 			})}
+			disabled={local.disabled}
 			{...others}
 		>
 			{local.children}
@@ -86,6 +92,12 @@ cursor: pointer;
 		background-color: var(--surface-hover-background);
 		border-color: var(--surface-hover-border-color);
 	}
+}
+
+&.disabled {
+	opacity: 0.5;
+	cursor: not-allowed;
+	pointer-events: none;
 }
 
 `
