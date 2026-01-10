@@ -1,10 +1,10 @@
-import { mergeProps, splitProps } from 'solid-js'
-import { css, cx } from '@emotion/css'
+import { createMemo, splitProps } from 'solid-js'
+import { css } from '@emotion/css'
 
 const defaults = {
 	variant: 'solid',
 	size: 'md',
-
+	color: 'blue',
 }
 
 const Button = (props)=> {
@@ -12,20 +12,27 @@ const Button = (props)=> {
 		'children',
 		'variant',
 		'size',
+		'color',
 		'class',
 		'className',
 	])
 
-	// 計算size的class
+	// 計算size的class - 使用 getter 函數保持響應性
 	const validSizes = ['xs', 'sm', 'md', 'lg', 'xl', 'xxl']
-	const sizeName = validSizes.includes(local.size) ? local.size : defaults.size
-	const colorName = props.color || 'blue'
-	const variantName = local.variant || defaults.variant
+	const sizeName = createMemo(()=> {
+		const size = local.size || defaults.size
+		return validSizes.includes(size) ? size : defaults.size
+	})
+	const colorName = createMemo(()=> local.color || defaults.color)
+	const variantName = createMemo(()=> local.variant || defaults.variant)
 
 	return (
 		<button
-			classList={{ [sizeName]: true, [variantName]: true }}
-			class={containerStyle({ sizeName, colorName })}
+			classList={{ [sizeName()]: true, [variantName()]: true }}
+			class={containerStyle({
+				sizeName: sizeName(),
+				colorName: colorName(),
+			})}
 			{...others}
 		>
 			{local.children}
