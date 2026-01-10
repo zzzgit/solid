@@ -12,10 +12,25 @@ const expressionColorMap = {
 	primary: 'blue',
 	secondary: 'mauve',
 	success: 'green',
-	warning: 'yellow',
+	warning: 'orange',
 	danger: 'red',
 	info: 'cyan',
 }
+
+const warmColors = new Set([
+	'yellow',
+	'orange',
+	'amber',
+	'gold',
+	'bronze',
+	'brown',
+	'tomato',
+	'red',
+	'crimson',
+	'rose',
+	'pink',
+	'salmon',
+])
 
 const Button = (props)=> {
 	const [local, others] = splitProps(props, [
@@ -47,6 +62,10 @@ const Button = (props)=> {
 		return expressionColorMap[expressionName()]
 	})
 
+	const solidForeground = createMemo(()=> {
+		return warmColors.has(colorName()) ? 'black' : 'white'
+	})
+
 	const variantName = createMemo(()=> local.variant || defaults.variant)
 
 	return (
@@ -55,6 +74,7 @@ const Button = (props)=> {
 				containerStyle({
 					sizeName: sizeName(),
 					colorName: colorName(),
+					solidForeground: solidForeground(),
 				}),
 				sizeName(),
 				variantName(),
@@ -74,10 +94,13 @@ const Button = (props)=> {
 
 export default Button
 
-const containerStyle = ({ sizeName, colorName })=> css`
+const containerStyle = ({
+	sizeName, colorName, solidForeground,
+})=> css`
 --solid-background: var(--${colorName}-9);
 --solid-hover-background: var(--${colorName}-10);
 --solid-active-background: var(--${colorName}-11);
+--solid-foreground: ${solidForeground};
 --outline-border: var(--${colorName}-a7);
 --outline-foreground: var(--${colorName}-a11);
 --outline-hover-background: var(--${colorName}-a2);
@@ -100,7 +123,7 @@ user-select: none;
 
 &.solid {
 	background-color: var(--solid-background);
-	color: white;
+	color: var(--solid-foreground);
 	border-color: var(--accent-color);
 	&:hover {
 		background-color: var(--solid-hover-background);
