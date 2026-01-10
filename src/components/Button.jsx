@@ -16,6 +16,7 @@ const Button = (props)=> {
 		'class',
 		'className',
 		'disabled',
+		'loading',
 	])
 
 	// 計算size的class - 使用 getter 函數保持響應性
@@ -36,10 +37,10 @@ const Button = (props)=> {
 				}),
 				sizeName(),
 				variantName(),
-				local.disabled && 'disabled',
+				local.loading && 'loading',
 				local.class || local.className,
 			].filter(Boolean).join(' ')}
-			disabled={local.disabled}
+			disabled={local.disabled || local.loading}
 			{...others}
 		>
 			{local.children}
@@ -67,7 +68,8 @@ padding: var(--component-padding-${sizeName});
 font-size: var(--component-font-size-${sizeName});
 border-radius: 4px;
 border: none;
-cursor: pointer;	
+cursor: pointer;
+user-select: none;
 
 &.solid {
 	background-color: var(--solid-background);
@@ -95,9 +97,39 @@ cursor: pointer;
 	}
 }
 
-&.disabled {
+&:disabled {
 	opacity: 0.5;
 	cursor: not-allowed;
+}
+
+&.loading {
+	position: relative;
+	opacity: 0.7;
+	cursor: progress;
+	
+	&::after {
+		content: '';
+		position: absolute;
+		width: 16px;
+		height: 16px;
+		top: 50%;
+		left: 50%;
+		margin-left: -8px;
+		margin-top: -8px;
+		border: 2px solid transparent;
+		border-top-color: currentColor;
+		border-radius: 50%;
+		animation: button-loading-spinner 0.6s linear infinite;
+	}
+}
+
+@keyframes button-loading-spinner {
+	from {
+		transform: rotate(0turn);
+	}
+	to {
+		transform: rotate(1turn);
+	}
 }
 
 `
