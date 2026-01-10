@@ -1,0 +1,23 @@
+/* // xs sm md lg xl xxl */
+:root {
+    --component-height-xs: 32px;
+    --component-height-sm: 36px;
+    --component-height-md: 40px;
+    --component-height-lg: 44px;
+    --component-height-xl: 48px;
+    --component-height-xxl: 64px;
+
+    --component-padding-xs: 0 10px;
+    --component-padding-sm: 0 12px;
+    --component-padding-md: 0 14px;
+    --component-padding-lg: 0 16px;
+    --component-padding-xl: 0 18px;
+    --component-padding-xxl: 0 24px;
+
+    --component-font-size-xs: 14px;
+    --component-font-size-sm: 14px;
+    --component-font-size-md: 14px;
+    --component-font-size-lg: 16px;
+    --component-font-size-xl: 16px;
+    --component-font-size-xxl: 18px;
+}
