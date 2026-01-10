@@ -6,6 +6,7 @@ const defaults = {
 	size: 'md',
 	color: null,
 	expression: 'primary',
+	borderRadius: 'sm',
 }
 
 const expressionColorMap = {
@@ -42,10 +43,12 @@ const Button = (props)=> {
 		'class',
 		'disabled',
 		'loading',
+		'borderRadius',
 	])
 
 	const validSizes = ['xs', 'sm', 'md', 'lg', 'xl', 'xxl']
 	const validExpressions = ['primary', 'secondary', 'success', 'warning', 'danger', 'info']
+	const borderRadiusOptions = ['none', 'sm', 'md', 'lg', 'full']
 
 	const sizeName = createMemo(()=> {
 		const size = local.size || defaults.size
@@ -55,6 +58,12 @@ const Button = (props)=> {
 	const expressionName = createMemo(()=> {
 		const expr = local.expression || defaults.expression
 		return validExpressions.includes(expr) ? expr : defaults.expression
+	})
+
+	const borderRadiusName = createMemo(()=> {
+		const radius = local.borderRadius || defaults.borderRadius
+		const keyword = borderRadiusOptions.includes(radius) ? radius : defaults.borderRadius
+		return `radius-${keyword}`
 	})
 
 	const colorName = createMemo(()=> {
@@ -75,6 +84,7 @@ const Button = (props)=> {
 					sizeName: sizeName(),
 					colorName: colorName(),
 					solidForeground: solidForeground(),
+					borderRadiusName: borderRadiusName(),
 				}),
 				sizeName(),
 				variantName(),
@@ -95,8 +105,13 @@ const Button = (props)=> {
 export default Button
 
 const containerStyle = ({
-	sizeName, colorName, solidForeground,
+	sizeName, colorName, solidForeground, borderRadiusName,
 })=> css`
+--border-radius-none: 0;
+--border-radius-sm: 0.125;
+--border-radius-md: 0.25;
+--border-radius-lg: 0.4;
+--border-radius-full: 100;
 --solid-background: var(--${colorName}-9);
 --solid-hover-background: var(--${colorName}-10);
 --solid-active-background: var(--${colorName}-11);
@@ -113,10 +128,10 @@ const containerStyle = ({
 --surface-foreground: var(--${colorName}-11);
 
 height: var(--component-height-${sizeName});
+border-radius: calc(var(--component-height-${sizeName}) * var(--border-${borderRadiusName}) );
 min-height: var(--component-height-${sizeName});
 padding: var(--component-padding-${sizeName});
 font-size: var(--component-font-size-${sizeName});
-border-radius: 4px;
 border: none;
 cursor: pointer;
 user-select: none;
@@ -124,7 +139,7 @@ user-select: none;
 &.solid {
 	background-color: var(--solid-background);
 	color: var(--solid-foreground);
-	border-color: var(--accent-color);
+	// border-color: var(--accent-color);
 	&:hover {
 		background-color: var(--solid-hover-background);
 	}

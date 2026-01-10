@@ -61,13 +61,12 @@ export default function About(){
 			<div style={{
 				'margin-top': '30px', display: 'flex', gap: '10px',
 			}}>
-				<Button color='purple' disabled size='sm' variant='solid'>聯繫我們</Button>
-				<Button color='purple' disabled size='md' variant='surface'>聯繫我們</Button>
-				<Button color='purple' disabled size='md' variant='outline'>聯繫我們</Button>
-				<Button color='purple' disabled size='lg' variant='solid'>聯繫我們</Button>
-				<Button color='purple' disabled size='lg'>聯繫我們</Button>
-				<Button color='purple' disabled size='xl' >聯繫我們</Button>
-
+				<Button color='purple' borderRadius='none' disabled size='sm' variant='solid'>聯繫我們</Button>
+				<Button color='purple' borderRadius='sm' disabled size='md' variant='surface'>聯繫我們</Button>
+				<Button color='purple' borderRadius='md' disabled size='md' variant='outline'>聯繫我們</Button>
+				<Button color='purple' borderRadius='lg' disabled size='lg' variant='solid'>聯繫我們</Button>
+				<Button color='purple' borderRadius='lg' disabled size='lg'>聯繫我們</Button>
+				<Button color='purple' borderRadius='full' disabled size='xl' >聯繫我們</Button>
 			</div>
 		</div>
 	)
