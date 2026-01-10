@@ -4,7 +4,17 @@ import { css } from '@emotion/css'
 const defaults = {
 	variant: 'solid',
 	size: 'md',
-	color: 'blue',
+	color: null,
+	expression: 'primary',
+}
+
+const expressionColorMap = {
+	primary: 'blue',
+	secondary: 'mauve',
+	success: 'green',
+	warning: 'yellow',
+	danger: 'red',
+	info: 'cyan',
 }
 
 const Button = (props)=> {
@@ -13,17 +23,30 @@ const Button = (props)=> {
 		'variant',
 		'size',
 		'color',
+		'expression',
 		'class',
 		'disabled',
 		'loading',
 	])
 
 	const validSizes = ['xs', 'sm', 'md', 'lg', 'xl', 'xxl']
+	const validExpressions = ['primary', 'secondary', 'success', 'warning', 'danger', 'info']
+
 	const sizeName = createMemo(()=> {
 		const size = local.size || defaults.size
 		return validSizes.includes(size) ? size : defaults.size
 	})
-	const colorName = createMemo(()=> local.color || defaults.color)
+
+	const expressionName = createMemo(()=> {
+		const expr = local.expression || defaults.expression
+		return validExpressions.includes(expr) ? expr : defaults.expression
+	})
+
+	const colorName = createMemo(()=> {
+		if (local.color){ return local.color }
+		return expressionColorMap[expressionName()]
+	})
+
 	const variantName = createMemo(()=> local.variant || defaults.variant)
 
 	return (
@@ -35,10 +58,13 @@ const Button = (props)=> {
 				}),
 				sizeName(),
 				variantName(),
+				expressionName(),
 				local.loading && 'loading',
 				local.class,
 			].filter(Boolean).join(' ')}
 			disabled={local.disabled || local.loading}
+			aria-busy={local.loading}
+			aria-disabled={local.disabled || local.loading}
 			{...others}
 		>
 			{local.children}
@@ -82,6 +108,10 @@ user-select: none;
 	&:active {
 		background-color: var(--solid-active-background);
 	}
+	&:focus-visible {
+		outline: 2px solid var(--solid-background);
+		outline-offset: 2px;
+	}
 }
 &.outline {
 	border: 1px solid var(--outline-border);
@@ -92,6 +122,10 @@ user-select: none;
 	}
 	&:active {
 		background-color: var(--outline-active-background);
+	}
+	&:focus-visible {
+		outline: 2px solid var(--outline-foreground);
+		outline-offset: 2px;
 	}
 }
 &.surface {
@@ -104,6 +138,10 @@ user-select: none;
 	}
 	&:active {
 		background-color: var(--surface-active-background);
+	}
+	&:focus-visible {
+		outline: 2px solid var(--surface-foreground);
+		outline-offset: 2px;
 	}
 }
 

@@ -92,6 +92,7 @@ When disabled:
 - Opacity is reduced to 0.5
 - Cursor changes to `not-allowed`
 - Button is not clickable
+- `aria-disabled="true"` is set for accessibility
 
 ### Loading
 
@@ -104,6 +105,19 @@ When loading:
 - Opacity is reduced to 0.7
 - Cursor changes to `progress`
 - Button is automatically disabled
+- `aria-busy="true"` is set for accessibility
+
+### Focus
+
+When the button receives focus (via keyboard or click):
+- A 2px outline appears with 2px offset
+- Solid variant: outline color matches the button background
+- Outline variant: outline color matches the button text color
+- Surface variant: outline color matches the button text color
+
+```jsx
+<Button>Tab to focus</Button>
+```
 
 ## Usage Examples
 
@@ -181,3 +195,4 @@ The loading state includes a spinning animation defined as:
 - If an invalid size is provided, the component defaults to `'md'`
 - When `loading` is `true`, the button is automatically disabled
 - All native button attributes (like `type`, `form`, etc.) can be passed through
+- Focus styles are automatically applied and improve keyboard accessibility

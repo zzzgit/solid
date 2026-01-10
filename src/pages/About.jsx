@@ -40,10 +40,10 @@ export default function About(){
 			<div style={{
 				'margin-top': '30px', display: 'flex', gap: '10px',
 			}}>
-				<Button color='blue' size='sm'variant='solid'>聯繫我們</Button>
-				<Button color='blue' size='md'variant='surface'>聯繫我們</Button>
-				<Button color='blue' size='md'variant='outline'>聯繫我們</Button>
-				<Button color='blue' size='lg'variant='solid'>聯繫我們</Button>
+				<Button color='blue' size='sm' variant='solid'>聯繫我們</Button>
+				<Button color='blue' size='md' variant='surface'>聯繫我們</Button>
+				<Button color='blue' size='md' variant='outline'>聯繫我們</Button>
+				<Button color='blue' size='lg' variant='solid'>聯繫我們</Button>
 				<Button color='blue' size='lg'>聯繫我們</Button>
 				<Button color='blue' size='xl' >聯繫我們</Button>
 
@@ -51,10 +51,20 @@ export default function About(){
 			<div style={{
 				'margin-top': '30px', display: 'flex', gap: '10px',
 			}}>
-				<Button color='purple' disabled size='sm'variant='solid'>聯繫我們</Button>
-				<Button color='purple' disabled size='md'variant='surface'>聯繫我們</Button>
-				<Button color='purple' disabled size='md'variant='outline'>聯繫我們</Button>
-				<Button color='purple' disabled size='lg'variant='solid'>聯繫我們</Button>
+				<Button expression='primary' size='xl' >primary</Button>
+				<Button expression='secondary' size='lg'>secondary</Button>
+				<Button expression='danger' size='lg'>danger</Button>
+				<Button expression='warning' size='md'>warning</Button>
+				<Button expression='info' size='md'>info</Button>
+				<Button expression='success' size='sm'>success</Button>
+			</div>
+			<div style={{
+				'margin-top': '30px', display: 'flex', gap: '10px',
+			}}>
+				<Button color='purple' disabled size='sm' variant='solid'>聯繫我們</Button>
+				<Button color='purple' disabled size='md' variant='surface'>聯繫我們</Button>
+				<Button color='purple' disabled size='md' variant='outline'>聯繫我們</Button>
+				<Button color='purple' disabled size='lg' variant='solid'>聯繫我們</Button>
 				<Button color='purple' disabled size='lg'>聯繫我們</Button>
 				<Button color='purple' disabled size='xl' >聯繫我們</Button>
 
