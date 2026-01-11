@@ -107,47 +107,42 @@ export default Button
 const containerStyle = ({
 	sizeName, colorName, solidForeground, borderRadiusName,
 })=> css`
---border-radius-none: 0;
---border-radius-sm: 0.125;
---border-radius-md: 0.25;
---border-radius-lg: 0.4;
---border-radius-full: 100;
---yang-background: var(--${colorName}-9);
---yang-hover-background: var(--${colorName}-10);
---yang-active-background: var(--${colorName}-11);
 --yang-foreground: ${solidForeground};
---yin-background: var(--${colorName}-3);
---yin-hover-background: var(--${colorName}-4);
---yin-active-background: var(--${colorName}-5);
+--yang-background: var(--${colorName}-9);
+--yang-background-hover: var(--${colorName}-10);
+--yang-background-focus: var(--${colorName}-11);
 --yin-foreground: var(--${colorName}-11);
---outline-border: var(--${colorName}-a7);
+--yin-background: var(--${colorName}-3);
+--yin-background-hover: var(--${colorName}-4);
+--yin-background-focus: var(--${colorName}-5);
 --outline-foreground: var(--${colorName}-a11);
---outline-hover-background: var(--${colorName}-a2);
---outline-active-background: var(--${colorName}-a3);
+--outline-background-hover: var(--${colorName}-a2);
+--outline-background-focus: var(--${colorName}-a3);
+--outline-border: var(--${colorName}-a7);
+--perfect-foreground: var(--${colorName}-11);
 --perfect-background: var(--${colorName}-2);
---perfect-hover-background: var(--${colorName}-3);
---perfect-active-background: var(--${colorName}-4);
+--perfect-background-hover: var(--${colorName}-3);
+--perfect-background-focus: var(--${colorName}-4);
 --perfect-border-color: var(--${colorName}-6);
 --perfect-hover-border-color: var(--${colorName}-7);
---perfect-foreground: var(--${colorName}-11);
 
 height: var(--component-height-${sizeName});
-border-radius: calc(var(--component-height-${sizeName}) * var(--border-${borderRadiusName}) );
 min-height: var(--component-height-${sizeName});
 padding: var(--component-padding-${sizeName});
-font-size: var(--component-font-size-${sizeName});
 border: none;
+border-radius: calc(var(--component-height-${sizeName}) * var(--border-${borderRadiusName}) );
+font-size: var(--component-font-size-${sizeName});
 cursor: pointer;
 user-select: none;
 
 &.yang {
-	background-color: var(--yang-background);
 	color: var(--yang-foreground);
+	background-color: var(--yang-background);
 	&:not(:disabled):hover {
-		background-color: var(--yang-hover-background);
+		background-color: var(--yang-background-hover);
 	}
 	&:not(:disabled):active {
-		background-color: var(--yang-active-background);
+		background-color: var(--yang-background-focus);
 	}
 	&:not(:disabled):focus-visible {
 		outline: 2px solid var(--yang-background);
@@ -155,13 +150,13 @@ user-select: none;
 	}
 }
 &.yin {
-	background-color: var(--yin-background);
 	color: var(--yin-foreground);
+	background-color: var(--yin-background);
 	&:not(:disabled):hover {
-		background-color: var(--yin-hover-background);
+		background-color: var(--yin-background-hover);
 	}
 	&:not(:disabled):active {
-		background-color: var(--yin-active-background);
+		background-color: var(--yin-background-focus);
 	}
 	&:not(:disabled):focus-visible {
 		outline: 2px solid var(--yin-foreground);
@@ -169,14 +164,14 @@ user-select: none;
 	}
 }
 &.outline {
+	color: var(--outline-foreground);
 	border: 1px solid var(--outline-border);
 	background-color: transparent;
-	color: var(--outline-foreground);
 	&:not(:disabled):hover {
-		background-color: var(--outline-hover-background);
+		background-color: var(--outline-background-hover);
 	}
 	&:not(:disabled):active {
-		background-color: var(--outline-active-background);
+		background-color: var(--outline-background-focus);
 	}
 	&:not(:disabled):focus-visible {
 		outline: 2px solid var(--outline-foreground);
@@ -184,15 +179,15 @@ user-select: none;
 	}
 }
 &.perfect {
+	color: var(--perfect-foreground);
 	border: 1px solid var(--perfect-border-color);
 	background-color: var(--perfect-background);
-	color: var(--perfect-foreground);
 	&:not(:disabled):hover {
-		background-color: var(--perfect-hover-background);
+		background-color: var(--perfect-background-hover);
 		border-color: var(--perfect-hover-border-color);
 	}
 	&:not(:disabled):active {
-		background-color: var(--perfect-active-background);
+		background-color: var(--perfect-background-focus);
 	}
 	&:not(:disabled):focus-visible {
 		outline: 2px solid var(--perfect-foreground);

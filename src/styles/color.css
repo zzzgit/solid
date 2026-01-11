@@ -22,3 +22,19 @@
 @import "@radix-ui/colors/indigo-dark.css";
 @import "@radix-ui/colors/mauve.css";
 @import "@radix-ui/colors/mauve-dark.css";
+
+:root {
+    /* 組件級別 */
+    /* color */
+    --color-fg-warm-default: white;
+    --color-fg-cold-default: black;
+    --color-fg-default: black;
+    --color-bg-default: white;
+    --color-gray-default: gray;
+    /* radius scale */
+    --border-radius-none: 0;
+    --border-radius-sm: 0.125;
+    --border-radius-md: 0.25;
+    --border-radius-lg: 0.4;
+    --border-radius-full: 100;
+}
