@@ -48,21 +48,19 @@ const Button = (props)=> {
 
 	const validSizes = ['xs', 'sm', 'md', 'lg', 'xl', 'xxl']
 	const validExpressions = ['primary', 'secondary', 'success', 'warning', 'danger', 'info']
-	const borderRadiusOptions = ['none', 'sm', 'md', 'lg', 'full']
+	const validRadius = ['none', 'sm', 'md', 'lg', 'full']
+	const validVariants = ['solid', 'surface', 'subtle', 'outline', 'void']
 
 	const sizeName = createMemo(()=> {
-		const size = local.size || defaults.size
-		return validSizes.includes(size) ? size : defaults.size
+		return validSizes.includes(local.size) ? local.size : defaults.size
 	})
 
 	const expressionName = createMemo(()=> {
-		const expr = local.expression || defaults.expression
-		return validExpressions.includes(expr) ? expr : defaults.expression
+		return validExpressions.includes(local.expression) ? local.expression : defaults.expression
 	})
 
 	const borderRadiusName = createMemo(()=> {
-		const radius = local.borderRadius || defaults.borderRadius
-		const keyword = borderRadiusOptions.includes(radius) ? radius : defaults.borderRadius
+		const keyword = validRadius.includes(local.borderRadius) ? local.borderRadius : defaults.borderRadius
 		return `radius-${keyword}`
 	})
 
@@ -75,7 +73,9 @@ const Button = (props)=> {
 		return warmColors.has(colorName()) ? 'black' : 'white'
 	})
 
-	const variantName = createMemo(()=> local.variant || defaults.variant)
+	const variantName = createMemo(()=> {
+		return validVariants.includes(local.variant) ? local.variant : defaults.variant
+	})
 
 	return (
 		<button
@@ -179,6 +179,20 @@ user-select: none;
 	}
 	&:not(:disabled):focus-visible {
 		outline: 2px solid var(--surface-foreground);
+		outline-offset: 2px;
+	}
+}
+&.subtle {
+	background-color: var(--${colorName}-3);
+	color: var(--${colorName}-11);
+	&:not(:disabled):hover {
+		background-color: var(--${colorName}-4);
+	}
+	&:not(:disabled):active {
+		background-color: var(--${colorName}-5);
+	}
+	&:not(:disabled):focus-visible {
+		outline: 2px solid var(--${colorName}-11);
 		outline-offset: 2px;
 	}
 }

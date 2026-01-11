@@ -34,7 +34,7 @@ export default function About(){
 				<Button color='red' variant='outline'>聯繫我們</Button>
 				<Button color='red' loading variant='solid'>聯繫我們</Button>
 				<Button color='red' size='lg' class='custom-class'>聯繫我們</Button>
-				<Button color='red' size='sm'>聯繫我們</Button>
+				<Button color='red' size='sm' variant='subtle'>聯繫我們</Button>
 
 			</div>
 			<div style={{
@@ -44,7 +44,7 @@ export default function About(){
 				<Button color='blue' size='md' variant='surface'>聯繫我們</Button>
 				<Button color='blue' size='md' variant='outline'>聯繫我們</Button>
 				<Button color='blue' size='lg' variant='solid'>聯繫我們</Button>
-				<Button color='blue' size='lg'>聯繫我們</Button>
+				<Button color='blue' size='lg' variant='subtle'>聯繫我們</Button>
 				<Button color='blue' size='xl' >聯繫我們</Button>
 
 			</div>
