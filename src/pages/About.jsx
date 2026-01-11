@@ -29,8 +29,8 @@ export default function About(){
 			<div style={{
 				'margin-top': '30px', display: 'flex', gap: '10px',
 			}}>
-				<Button color='red' variant='solid'>聯繫我們</Button>
-				<Button color='red' variant='surface' >聯繫我們</Button>
+				<Button color='red' variant='yang'>聯繫我們</Button>
+				<Button color='red' variant='perfect' >聯繫我們</Button>
 				<Button color='red' variant='outline'>聯繫我們</Button>
 				<Button color='red' loading variant='solid'>聯繫我們</Button>
 				<Button color='red' size='lg' class='custom-class'>聯繫我們</Button>
@@ -40,11 +40,11 @@ export default function About(){
 			<div style={{
 				'margin-top': '30px', display: 'flex', gap: '10px',
 			}}>
-				<Button color='blue' size='sm' variant='solid'>聯繫我們</Button>
-				<Button color='blue' size='md' variant='surface'>聯繫我們</Button>
+				<Button color='blue' size='sm' variant='yang'>聯繫我們</Button>
+				<Button color='blue' size='md' variant='perfect'>聯繫我們</Button>
 				<Button color='blue' size='md' variant='outline'>聯繫我們</Button>
-				<Button color='blue' size='lg' variant='solid'>聯繫我們</Button>
-				<Button color='blue' size='lg' variant='subtle'>聯繫我們</Button>
+				<Button color='blue' size='lg' variant='yang'>聯繫我們</Button>
+				<Button color='blue' size='lg' variant='yin'>聯繫我們</Button>
 				<Button color='blue' size='xl' >聯繫我們</Button>
 
 			</div>
@@ -61,10 +61,10 @@ export default function About(){
 			<div style={{
 				'margin-top': '30px', display: 'flex', gap: '10px',
 			}}>
-				<Button color='purple' borderRadius='none' disabled size='sm' variant='solid'>聯繫我們</Button>
-				<Button color='purple' borderRadius='sm' disabled size='md' variant='surface'>聯繫我們</Button>
+				<Button color='purple' borderRadius='none' disabled size='sm' variant='yang'>聯繫我們</Button>
+				<Button color='purple' borderRadius='sm' disabled size='md' variant='perfect'>聯繫我們</Button>
 				<Button color='purple' borderRadius='md' disabled size='md' variant='outline'>聯繫我們</Button>
-				<Button color='purple' borderRadius='lg' disabled size='lg' variant='solid'>聯繫我們</Button>
+				<Button color='purple' borderRadius='lg' disabled size='lg' variant='yang'>聯繫我們</Button>
 				<Button color='purple' borderRadius='lg' disabled size='lg'>聯繫我們</Button>
 				<Button color='purple' borderRadius='full' disabled size='xl' >聯繫我們</Button>
 			</div>
