@@ -33,7 +33,7 @@ const Input = (props)=> {
 	const validSizes = ['xs', 'sm', 'md', 'lg', 'xl', 'xxl']
 	const validExpressions = ['primary', 'secondary', 'success', 'warning', 'danger', 'info']
 	const validRadius = ['none', 'sm', 'md', 'lg', 'full']
-	const validVariants = ['outline', 'yang']
+	const validVariants = ['outline', 'yang', 'flushed']
 
 	const sizeName = createMemo(()=> {
 		return validSizes.includes(local.size) ? local.size : defaults.size
@@ -97,6 +97,13 @@ const containerStyle = ({
 --yang-background-hover: var(--${colorName}-4);
 --yang-background-focus: var(--${colorName}-5);
 
+--flushed-foreground: var(--color-fg-default);
+--flushed-background: var(--color-bg-default);
+--flushed-border: var(--${colorName}-a7);
+--flushed-border-hover: var(--${colorName}-a8);
+--flushed-border-focus: var(--${colorName}-a9);
+--flushed-focus-shadow: var(--${colorName}-a3);
+
 height: var(--component-height-${sizeName});
 min-height: var(--component-height-${sizeName});
 padding: var(--component-padding-${sizeName});
@@ -142,15 +149,24 @@ transition: all 0.15s ease;
 	
 }
 
-
-&.error {
-	border-color: var(--red-8);
+&.flushed {
+	color: var(--flushed-foreground);
+	background-color: var(--flushed-background);
+	border: none;
+	border-bottom: 1px solid var(--flushed-border);
+	border-radius: 0;
+	
+	&:not(:disabled):hover {
+		border-bottom-color: var(--flushed-border-hover);
+	}
 	
 	&:not(:disabled):focus {
-		border-color: var(--red-9);
-		box-shadow: 0 0 0 3px var(--red-a3);
+		border-bottom-color: var(--flushed-border-focus);
+		box-shadow: 0 2px 0 0 var(--flushed-focus-shadow);
 	}
+	
 }
+
 
 &:disabled {
 	opacity: 0.5;
