@@ -41,31 +41,3 @@ aside nav a:hover {
 aside nav .active-nav:hover {
     background-color: #1d4ed8 !important;
 }
-
-
-
-/* 表單元素聚焦效果 */
-input:focus,
-textarea:focus {
-    outline: none;
-    border-color: #2563eb !important;
-    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
-}
-
-/* 滾動條樣式 */
-::-webkit-scrollbar {
-    width: 6px;
-}
-
-::-webkit-scrollbar-track {
-    background: #f1f1f1;
-}
-
-::-webkit-scrollbar-thumb {
-    background: #c1c1c1;
-    border-radius: 3px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background: #a1a1a1;
-}

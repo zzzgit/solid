@@ -5,17 +5,14 @@ const defaults = {
 	variant: 'outline',
 	size: 'md',
 	color: null,
-	expression: 'primary',
+	expression: 'normal',
 	borderRadius: 'sm',
 }
 
 const expressionColorMap = {
-	primary: 'blue',
-	secondary: 'mauve',
-	success: 'green',
-	warning: 'orange',
-	danger: 'red',
-	info: 'cyan',
+	normal: 'blue',
+	valid: 'green',
+	invalid: 'red',
 }
 
 const Input = (props)=> {
@@ -27,11 +24,10 @@ const Input = (props)=> {
 		'class',
 		'disabled',
 		'borderRadius',
-		'error',
 	])
 
 	const validSizes = ['xs', 'sm', 'md', 'lg', 'xl', 'xxl']
-	const validExpressions = ['primary', 'secondary', 'success', 'warning', 'danger', 'info']
+	const validExpressions = ['valid', 'invalid']
 	const validRadius = ['none', 'sm', 'md', 'lg', 'full']
 	const validVariants = ['outline', 'yang', 'flushed']
 
@@ -49,7 +45,6 @@ const Input = (props)=> {
 	})
 
 	const colorName = createMemo(()=> {
-		if (local.error){ return 'red' }
 		if (local.color){ return local.color }
 		return expressionColorMap[expressionName()]
 	})
@@ -69,11 +64,10 @@ const Input = (props)=> {
 				sizeName(),
 				variantName(),
 				expressionName(),
-				local.error && 'error',
 				local.class,
 			].filter(Boolean).join(' ')}
 			disabled={local.disabled}
-			aria-invalid={local.error}
+			aria-invalid={local.expression === 'invalid'}
 			aria-disabled={local.disabled}
 			{...others}
 		/>
@@ -162,11 +156,10 @@ transition: all 0.15s ease;
 	
 	&:not(:disabled):focus {
 		border-bottom-color: var(--flushed-border-focus);
-		box-shadow: 0 2px 0 0 var(--flushed-focus-shadow);
+		box-shadow: 0 3px 0 0 var(--flushed-focus-shadow);
 	}
 	
 }
-
 
 &:disabled {
 	opacity: 0.5;

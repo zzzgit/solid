@@ -1,5 +1,6 @@
 import { css } from '@emotion/css'
 import Button from '../components/Button.jsx'
+import Input from '../components/Input.jsx'
 
 export default function About(){
 	return (
@@ -67,6 +68,22 @@ export default function About(){
 				<Button color='purple' borderRadius='lg' disabled size='lg' variant='yang'>聯繫我們</Button>
 				<Button color='purple' borderRadius='lg' disabled size='lg'>聯繫我們</Button>
 				<Button color='purple' borderRadius='full' disabled size='xl' >聯繫我們</Button>
+			</div>
+			<div style={{
+				'margin-top': '30px', display: 'flex', gap: '10px',
+			}}>
+				<Input placeholder='Outline Input' variant='outline' />
+				<Input placeholder='yang Input' variant='yang' />
+				<Input placeholder='Ghost Input' disabled variant='outline' />
+				<Input placeholder='Error Input' variant='flushed' />
+			</div>
+			<div style={{
+				'margin-top': '30px', display: 'flex', gap: '10px',
+			}}>
+				<Input expression='valid' placeholder='Outline Input' variant='outline' />
+				<Input expression='invalid' placeholder='yang Input' variant='yang' />
+				<Input expression='valid' placeholder='Ghost Input' disabled variant='outline' />
+				<Input expression='invalid' placeholder='Error Input' variant='flushed' />
 			</div>
 		</div>
 	)
