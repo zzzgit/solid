@@ -2,6 +2,8 @@ import './styles/reset.css'
 import './styles/color.css'
 import './global.css'
 import './styles/ark.css'
+import '@radix-ui/themes/styles.css'
+import './styles/size.css'
 import { render } from 'solid-js/web'
 import App from './App.jsx'
 
